@@ -9,7 +9,7 @@
   --color-error: oklch(70% 0.12 25); --color-success: oklch(78% 0.12 145);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(12% 0.008 240); --color-paper-2: oklch(15.5% 0.012 240); --color-paper-3: oklch(19.5% 0.015 240);
+  --color-paper: oklch(12% 0.008 240); --color-paper-2: oklch(15.5% 0.012 240); --color-paper-3: oklch(19.5% 0.015 240); --color-blackout: oklch(6% 0.005 240);
   --color-ink: oklch(96% 0.003 240); --color-ink-2: oklch(84% 0.008 240); --color-muted: oklch(65% 0.012 240);
   --color-rule: oklch(25% 0.01 240); --color-rule-2: oklch(32% 0.014 240);
   --color-accent: oklch(85% 0.13 140); --color-accent-hi: oklch(89% 0.12 140); --color-accent-ink: oklch(16% 0.03 140); --color-focus: oklch(85% 0.13 140);

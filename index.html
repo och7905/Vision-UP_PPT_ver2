@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="no-js">
 <head>
   <meta charset="UTF-8">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>결정론적 질량 산출 기반 PAVAS 오디오 생성 개선 연구</title>
   <meta name="description" content="3D 기하/광학 물성 기반 물리 추출 엔진 및 Phy-Adapter 통합 파이프라인 최종 발표 자료">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <div class="deck-blank-screen" id="deck-blank-screen" aria-hidden="true"></div>
   <div class="deck-progress-track" aria-hidden="true">
     <div class="deck-progress-bar" id="deck-progress"></div>
   </div>
@@ -32,7 +34,7 @@
     <div class="slide-deck">
 
       <!-- Slide 1: 표지 -->
-      <section class="slide active ticks" id="slide-1" aria-label="표지">
+      <section class="slide active ticks" id="slide-1" role="region" aria-roledescription="slide" aria-label="표지" aria-hidden="false">
         <div class="hero-slide-inner">
           <div class="hero-super">Vision-Up 최종 발표 / 2026</div>
           <h1 class="hero-main-title">결정론적 질량 산출 기반<br>PAVAS 오디오 생성 개선</h1>
@@ -47,8 +49,16 @@
               <div class="meta-col-val">AIONE+</div>
             </div>
             <div>
-              <div class="meta-col-title">핵심 기술</div>
-              <div class="meta-col-val">CUT3R 3D 기하 적분 / 유효 밀도 / DiT 잔차 변조</div>
+              <div class="meta-col-title">지도교수</div>
+              <div class="meta-col-val">전승현</div>
+            </div>
+            <div>
+              <div class="meta-col-title">팀장</div>
+              <div class="meta-col-val">오창현</div>
+            </div>
+            <div>
+              <div class="meta-col-title">팀원</div>
+              <div class="meta-col-val">권관우, 장준혁</div>
             </div>
           </div>
         </div>
@@ -59,7 +69,7 @@
       </section>
 
       <!-- Slide 2: 연구 배경 및 문제 정의 -->
-      <section class="slide ticks" id="slide-2" aria-label="연구 배경 및 문제 정의">
+      <section class="slide ticks" id="slide-2" role="region" aria-roledescription="slide" aria-label="연구 배경 및 문제 정의" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">연구 배경 및 문제 정의</h2>
           <p class="slide-subtitle">기존 Video-to-Audio 모델 및 선행 연구 PAVAS의 물리적 한계점 분석</p>
@@ -102,7 +112,7 @@
       </section>
 
       <!-- Slide 3: 기존 PAVAS vs 제안 연구 비교 -->
-      <section class="slide ticks" id="slide-3" aria-label="기존 PAVAS vs 제안 연구 비교">
+      <section class="slide ticks" id="slide-3" role="region" aria-roledescription="slide" aria-label="기존 PAVAS vs 제안 연구 비교" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">기존 PAVAS 대비 제안 연구 차별점</h2>
           <p class="slide-subtitle">블랙박스 텍스트 추측 체계에서 관측 기반 결정론적 연산 체계로의 전환</p>
@@ -147,7 +157,7 @@
       </section>
 
       <!-- Slide 4: 전체 연구 추진 로드맵 -->
-      <section class="slide ticks" id="slide-4" aria-label="전체 연구 추진 로드맵">
+      <section class="slide ticks" id="slide-4" role="region" aria-roledescription="slide" aria-label="전체 연구 추진 로드맵" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">전체 연구 추진 로드맵</h2>
           <p class="slide-subtitle">4단계 유기적 파이프라인: 아키텍처 재구현부터 엔진 구축 및 통합 검증까지</p>
@@ -179,7 +189,7 @@
       </section>
 
       <!-- Slide 5: 연구 성과 ①: PAVAS 아키텍처 자체 재구현 -->
-      <section class="slide ticks" id="slide-5" aria-label="연구 성과: PAVAS 아키텍처 자체 재구현">
+      <section class="slide ticks" id="slide-5" role="region" aria-roledescription="slide" aria-label="연구 성과: PAVAS 아키텍처 자체 재구현" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">연구 성과: PAVAS 아키텍처 자체 재구현</h2>
           <p class="slide-subtitle">하드웨어 제약 극복을 위한 축소 모델 구현 및 Vision-UP 데이터 10% 학습 검증</p>
@@ -207,7 +217,7 @@
       </section>
 
       <!-- Slide 6: 연구 성과 ②: 결정론적 질량 산출 엔진 -->
-      <section class="slide ticks" id="slide-6" aria-label="연구 성과: 결정론적 질량 산출 엔진">
+      <section class="slide ticks" id="slide-6" role="region" aria-roledescription="slide" aria-label="연구 성과: 결정론적 질량 산출 엔진" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">연구 성과: 결정론적 질량 산출 엔진</h2>
           <p class="slide-subtitle">3D 기하 적분 및 광학 물성 기반의 지배 방정식 정립</p>
@@ -240,7 +250,7 @@
       </section>
 
       <!-- Slide 7: 세부 기법 ①: 3D 체적 적분 및 내부 충실도 보정 -->
-      <section class="slide ticks" id="slide-7" aria-label="세부 기법: 3D 체적 적분 및 내부 충실도 보정">
+      <section class="slide ticks" id="slide-7" role="region" aria-roledescription="slide" aria-label="세부 기법: 3D 체적 적분 및 내부 충실도 보정" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">세부 기법: 3D 체적 적분 및 충실도 보정</h2>
           <p class="slide-subtitle">원근 왜곡 제거 메쉬 적분과 3계층 내부 충실도 분기 알고리즘</p>
@@ -287,7 +297,7 @@
       </section>
 
       <!-- Slide 8: 세부 기법 ②: 비전 재질 분류 기반 유효 밀도 매핑 -->
-      <section class="slide ticks" id="slide-8" aria-label="세부 기법: 비전 재질 분류 기반 유효 밀도 매핑">
+      <section class="slide ticks" id="slide-8" role="region" aria-roledescription="slide" aria-label="세부 기법: 비전 재질 분류 기반 유효 밀도 매핑" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">세부 기법: 비전 재질 분류 기반 유효 밀도</h2>
           <p class="slide-subtitle">텍스트 프롬프트 배제 및 반사광/텍스처 기반 연속형 물리 밀도 도출</p>
@@ -337,7 +347,7 @@
       </section>
 
       <!-- Slide 9: 연구 성과 ③: 물리 어댑터 통합 및 특징 정규화 파이프라인 -->
-      <section class="slide ticks" id="slide-9" aria-label="연구 성과: 물리 어댑터 통합 및 특징 정규화 파이프라인">
+      <section class="slide ticks" id="slide-9" role="region" aria-roledescription="slide" aria-label="연구 성과: 물리 어댑터 통합 및 특징 정규화 파이프라인" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">연구 성과: 물리 어댑터 통합 및 특징 정규화</h2>
           <p class="slide-subtitle">4단계 텐서 처리 파이프라인 및 DiT 잔차 변조 주입</p>
@@ -369,7 +379,7 @@
       </section>
 
       <!-- Slide 10: 실험 결과 ①: 질량 추정 정확도 비교 -->
-      <section class="slide ticks" id="slide-10" aria-label="실험 결과: 질량 추정 정확도 비교">
+      <section class="slide ticks" id="slide-10" role="region" aria-roledescription="slide" aria-label="실험 결과: 질량 추정 정확도 비교" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">실험 결과: 질량 추정 오차(MAPE) 비교</h2>
           <p class="slide-subtitle">대조군 테스트셋(쇠구슬/유리구슬, 빈 캔/금속 원통) 기반 정량 평가</p>
@@ -437,29 +447,32 @@
       </section>
 
       <!-- Slide 11: 특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다 -->
-      <section class="slide ticks" id="slide-11" aria-label="특정상황 질량이 큰 물체의 충돌 영상 개선">
+      <section class="slide ticks" id="slide-11" role="region" aria-roledescription="slide" aria-label="특정상황 질량이 큰 물체의 충돌 영상 개선" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">특정상황: 질량이 큰 물체의 충돌 영상에서 <span class="stat-highlight">~%</span>의 개선이 되었다</h2>
           <p class="slide-subtitle">고중량 물체 충돌 음향 합성 품질 개선 결과 및 비교 시연</p>
         </div>
         <div class="slide-body">
-          <!-- 예시 영상 삽입 영역 -->
-          <div class="video-placeholder">
-            <svg class="video-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="3"></rect>
-              <line x1="7" y1="2" x2="7" y2="22"></line>
-              <line x1="17" y1="2" x2="17" y2="22"></line>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <line x1="2" y1="7" x2="7" y2="7"></line>
-              <line x1="2" y1="17" x2="7" y2="17"></line>
-              <line x1="17" y1="17" x2="22" y2="17"></line>
-              <line x1="17" y1="7" x2="22" y2="7"></line>
-            </svg>
-            <div class="video-placeholder-title">
-              고중량 물체 충돌 비교 시연 영상
-            </div>
-            <div class="video-placeholder-sub">
-              (질량이 큰 물체의 충돌 시연 비디오 또는 음향 스펙트로그램 비교 클립 임베딩)
+          <!-- 예시 영상 삽입 영역 (드래그앤드롭 및 로컬 파일 지원) -->
+          <div class="video-placeholder" id="video-placeholder" tabindex="0" role="button" aria-label="고중량 물체 충돌 비교 시연 영상 재생 또는 업로드">
+            <input type="file" id="video-file-input" accept="video/mp4,video/webm" style="display: none;" aria-hidden="true">
+            <div id="video-placeholder-content">
+              <svg class="video-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="3"></rect>
+                <line x1="7" y1="2" x2="7" y2="22"></line>
+                <line x1="17" y1="2" x2="17" y2="22"></line>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="2" y1="7" x2="7" y2="7"></line>
+                <line x1="2" y1="17" x2="7" y2="17"></line>
+                <line x1="17" y1="17" x2="22" y2="17"></line>
+                <line x1="17" y1="7" x2="22" y2="7"></line>
+              </svg>
+              <div class="video-placeholder-title">
+                고중량 물체 충돌 비교 시연 영상
+              </div>
+              <div class="video-placeholder-sub">
+                클릭하여 비디오(MP4/WebM)를 선택하거나 영상 파일을 여기에 드래그 앤 드롭하세요
+              </div>
             </div>
           </div>
         </div>
@@ -470,7 +483,7 @@
       </section>
 
       <!-- Slide 12: 결론 및 향후 계획 -->
-      <section class="slide ticks" id="slide-12" aria-label="결론 및 향후 계획">
+      <section class="slide ticks" id="slide-12" role="region" aria-roledescription="slide" aria-label="결론 및 향후 계획" aria-hidden="true">
         <div class="slide-header">
           <h2 class="slide-title">결론 및 향후 계획</h2>
           <p class="slide-subtitle">연구 요약, 실제 산업 응용 가치 및 Q&amp;A</p>
@@ -523,19 +536,24 @@
       const btnPrev = document.getElementById('btn-prev');
       const btnNext = document.getElementById('btn-next');
       const btnFullscreen = document.getElementById('btn-fullscreen');
+      const blankScreen = document.getElementById('deck-blank-screen');
       let currentIndex = 0;
       const totalSlides = slides.length;
 
       function updateSlide(index) {
-        if (index < 0 || index >= totalSlides) return;
+        const target = Math.max(0, Math.min(index, totalSlides - 1));
+        if (target === currentIndex && slides[currentIndex].classList.contains('active')) return;
+        
         slides.forEach(function (slide, idx) {
-          if (idx === index) {
+          if (idx === target) {
             slide.classList.add('active');
+            slide.setAttribute('aria-hidden', 'false');
           } else {
             slide.classList.remove('active');
+            slide.setAttribute('aria-hidden', 'true');
           }
         });
-        currentIndex = index;
+        currentIndex = target;
         const currentPadded = String(currentIndex + 1).padStart(2, '0');
         const totalPadded = String(totalSlides).padStart(2, '0');
         counter.textContent = currentPadded + ' / ' + totalPadded;
@@ -544,6 +562,7 @@
         }
         btnPrev.disabled = (currentIndex === 0);
         btnNext.disabled = (currentIndex === totalSlides - 1);
+        if (blankScreen) blankScreen.classList.remove('active');
       }
 
       function toggleFullscreen() {
@@ -552,6 +571,10 @@
         } else {
           document.exitFullscreen().catch(function () {});
         }
+      }
+
+      function toggleBlank() {
+        if (blankScreen) blankScreen.classList.toggle('active');
       }
 
       btnPrev.addEventListener('click', function () {
@@ -564,8 +587,28 @@
 
       btnFullscreen.addEventListener('click', toggleFullscreen);
 
+      if (blankScreen) {
+        blankScreen.addEventListener('click', function () {
+          blankScreen.classList.remove('active');
+        });
+      }
+
       document.addEventListener('keydown', function (e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        // Blank screen toggle (B, Period)
+        if ((e.key === 'b' || e.key === 'B' || e.key === '.') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          toggleBlank();
+          return;
+        }
+
+        // Dismiss blank screen on Escape or any navigation
+        if (blankScreen && blankScreen.classList.contains('active')) {
+          blankScreen.classList.remove('active');
+          if (e.key === 'Escape') return;
+        }
+
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
           e.preventDefault();
           updateSlide(currentIndex + 1);
@@ -607,6 +650,78 @@
           }
         }
       }, { passive: true });
+
+      // Video Demo Hardening: File Picker and Drag & Drop
+      const videoContainer = document.getElementById('video-placeholder');
+      const videoInput = document.getElementById('video-file-input');
+      const videoContent = document.getElementById('video-placeholder-content');
+      let videoPlayer = null;
+
+      function loadVideoFile(file) {
+        if (file && (file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|mov|mkv)$/i))) {
+          const url = URL.createObjectURL(file);
+          if (!videoPlayer && videoContainer) {
+            videoPlayer = document.createElement('video');
+            videoPlayer.controls = true;
+            videoPlayer.autoplay = true;
+            videoPlayer.loop = true;
+            videoPlayer.playsInline = true;
+            videoPlayer.style.width = '100%';
+            videoPlayer.style.maxHeight = '380px';
+            videoPlayer.style.borderRadius = 'var(--radius-card)';
+            videoPlayer.style.outline = 'none';
+            videoContainer.appendChild(videoPlayer);
+          }
+          if (videoPlayer && videoContent) {
+            videoPlayer.src = url;
+            videoContent.style.display = 'none';
+            videoPlayer.style.display = 'block';
+            videoPlayer.play().catch(function () {});
+          }
+        }
+      }
+
+      if (videoContainer && videoInput) {
+        videoContainer.addEventListener('click', function (e) {
+          if (e.target !== videoPlayer) {
+            videoInput.click();
+          }
+        });
+
+        videoContainer.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            videoInput.click();
+          }
+        });
+
+        videoInput.addEventListener('change', function (e) {
+          if (e.target.files && e.target.files[0]) {
+            loadVideoFile(e.target.files[0]);
+          }
+        });
+
+        videoContainer.addEventListener('dragover', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          videoContainer.classList.add('dragover');
+        });
+
+        videoContainer.addEventListener('dragleave', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          videoContainer.classList.remove('dragover');
+        });
+
+        videoContainer.addEventListener('drop', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          videoContainer.classList.remove('dragover');
+          if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+            loadVideoFile(e.dataTransfer.files[0]);
+          }
+        });
+      }
 
       updateSlide(0);
     })();
