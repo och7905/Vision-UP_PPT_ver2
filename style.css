@@ -1,0 +1,574 @@
+/* Hallmark · shape: feature-ledger · genre: modern-minimal · theme: Vantage (by request) · job: try · draw: academic-presentation-slides-deterministic-0edd
+ * hero: stage · nav: edge-aligned · footer: mast · imagery: none · signature: point-cloud-volume-density-pipeline · vantage: object/steel
+ * axes: dark/grotesk-sans/chromatic-lime · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: S, academic presentation slides; customized layout for 12 slides with data visualization and deterministic physics formulas */
+/* Hallmark · scope: app */
+@import url("./tokens.css");
+@import url("./base.css");
+
+:root {
+  --slide-width: 100%;
+  --slide-max-width: 1360px;
+  --slide-height: 740px;
+  --slide-print-width: 100vw;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: clip;
+}
+
+/* App Header & Navigation Bar */
+.deck-chrome {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-sm);
+  padding-inline: var(--gutter);
+  background-color: var(--color-paper-2);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.deck-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.deck-brand {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
+}
+
+.deck-tag {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+.deck-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.deck-counter {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  min-width: 64px;
+  text-align: center;
+}
+
+.btn-ctrl {
+  min-height: 44px;
+  padding-inline: var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+}
+
+.btn-ctrl:hover {
+  background-color: var(--color-paper-3);
+  border-color: var(--color-muted);
+}
+
+.btn-ctrl:active {
+  background-color: var(--color-paper-2);
+}
+
+.btn-ctrl:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.btn-ctrl:disabled,
+.btn-ctrl-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-ctrl-primary {
+  min-height: 44px;
+  padding-inline: var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+
+.btn-ctrl-primary:hover {
+  background-color: var(--color-accent-hi);
+}
+
+.btn-ctrl-primary:active {
+  background-color: var(--color-accent-hi);
+  transform: scale(0.98);
+}
+
+.btn-ctrl-primary:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Slide Stage */
+.slide-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-lg);
+  padding-inline: var(--gutter);
+}
+
+.slide-deck {
+  width: 100%;
+  max-width: var(--slide-max-width);
+  position: relative;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  min-height: var(--slide-height);
+  background-color: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.slide.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Vantage Corner Ticks */
+.ticks {
+  position: relative;
+}
+
+.ticks::before, .ticks::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: var(--rule-hair) solid var(--color-rule-2);
+  -webkit-mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0 0 / calc(100% - var(--tick)) calc(100% - var(--tick));
+  mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0 0 / calc(100% - var(--tick)) calc(100% - var(--tick));
+}
+
+/* Slide Typography & Structure */
+.slide-header {
+  margin-bottom: var(--space-lg);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  padding-bottom: var(--space-md);
+}
+
+.slide-title {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--color-ink);
+  letter-spacing: var(--tracking-display);
+}
+
+.slide-subtitle {
+  font-size: var(--text-md);
+  color: var(--color-muted);
+  margin-top: var(--space-xs);
+  max-width: 80ch;
+}
+
+.slide-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-sm);
+  border-top: var(--rule-hair) solid var(--color-rule);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+/* Grids and Panels */
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.panel {
+  padding: var(--space-md);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+}
+
+.panel-accent {
+  border-color: var(--color-rule-2);
+  background-color: var(--color-paper-3);
+  color: var(--color-ink);
+}
+
+.panel-title {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+
+.panel-desc {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+  line-height: 1.5;
+}
+
+/* Data Tables */
+.v-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  background-color: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule);
+}
+
+.v-table th {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  background-color: var(--color-paper-3);
+  color: var(--color-ink);
+  font-weight: 500;
+  border-bottom: var(--rule-hair) solid var(--color-rule-2);
+}
+
+.v-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  color: var(--color-ink-2);
+}
+
+.v-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.v-table td.highlight {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Math and Formula Blocks */
+.formula-banner {
+  background-color: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.formula-main {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.formula-expl {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: var(--space-xs);
+}
+
+/* Stat Display Tiles */
+.stat-box {
+  background-color: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.stat-value.accent {
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  margin-top: var(--space-xs);
+}
+
+.stat-diff {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  margin-top: var(--space-2xs);
+}
+
+/* Flow Pipeline Nodes */
+.pipeline-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-sm);
+  position: relative;
+}
+
+.step-node {
+  background-color: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+  position: relative;
+}
+
+.step-idx {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-bottom: var(--space-2xs);
+}
+
+.step-title {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+
+.step-text {
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  line-height: 1.45;
+}
+
+/* List with Line Markers */
+.metric-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  font-size: var(--text-sm);
+}
+
+.metric-name {
+  color: var(--color-ink-2);
+}
+
+.metric-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* Title Slide Specifics */
+.hero-slide-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-block: var(--space-2xl);
+}
+
+.hero-super {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.hero-main-title {
+  font-size: var(--text-display);
+  font-weight: 300;
+  color: var(--color-ink);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  max-width: 18ch;
+  margin-bottom: var(--space-md);
+}
+
+.hero-sub-title {
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--color-ink-2);
+  max-width: 48ch;
+  line-height: 1.35;
+  margin-bottom: var(--space-xl);
+}
+
+.hero-meta-block {
+  display: flex;
+  gap: var(--space-2xl);
+  border-top: var(--rule-hair) solid var(--color-rule-2);
+  padding-top: var(--space-md);
+  font-size: var(--text-sm);
+}
+
+.meta-col-title {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-3xs);
+}
+
+.meta-col-val {
+  color: var(--color-ink);
+  font-weight: 400;
+}
+
+@media (max-width: 60rem) {
+  .grid-2col, .grid-3col, .grid-4col, .pipeline-track {
+    grid-template-columns: 1fr;
+  }
+  .slide-deck {
+    height: auto;
+  }
+}
+
+/* Print Styles: 16:9 Landscape, 12 Distinct Pages, Hidden Chrome */
+@page {
+  size: 16/9 landscape;
+  margin: 0;
+}
+
+@media print {
+  .deck-chrome {
+    display: none !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: var(--color-paper) !important;
+    color: var(--color-ink) !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .slide-stage {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .slide-deck {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .slide {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    width: var(--slide-print-width) !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: var(--space-xl) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: var(--color-paper-2) !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .slide:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+  .slide-header {
+    margin-bottom: var(--space-md) !important;
+    padding-bottom: var(--space-sm) !important;
+  }
+
+  .slide-title {
+    font-size: var(--text-xl) !important;
+  }
+
+  .slide-subtitle {
+    font-size: var(--text-sm) !important;
+  }
+
+  .formula-banner {
+    padding: var(--space-md) !important;
+    margin-bottom: var(--space-sm) !important;
+  }
+
+  .panel {
+    break-inside: avoid !important;
+  }
+}

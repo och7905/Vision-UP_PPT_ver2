@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결정론적 질량 산출 기반 PAVAS 오디오 생성 개선 연구</title>
+  <meta name="description" content="3D 기하/광학 물성 기반 물리 추출 엔진 및 Phy-Adapter 통합 파이프라인 최종 발표 자료">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@200..500,0,0..100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="deck-chrome">
+    <div class="deck-identity">
+      <span class="deck-brand">AIONE+</span>
+      <span class="deck-tag">컴퓨터공학과 최종 연구발표</span>
+    </div>
+    <div class="deck-controls">
+      <button type="button" class="btn-ctrl" id="btn-prev" aria-label="이전 슬라이드">이전</button>
+      <span class="deck-counter" id="deck-counter" aria-live="polite">01 / 12</span>
+      <button type="button" class="btn-ctrl" id="btn-next" aria-label="다음 슬라이드">다음</button>
+      <button type="button" class="btn-ctrl-primary" id="btn-fullscreen" aria-label="전체화면 전환">전체화면</button>
+    </div>
+  </header>
+
+  <main class="slide-stage">
+    <div class="slide-deck">
+
+      <!-- Slide 1: 표지 -->
+      <section class="slide active ticks" id="slide-1" aria-label="표지">
+        <div class="hero-slide-inner">
+          <div class="hero-super">학술 연구 최종 발표 / 2026</div>
+          <h1 class="hero-main-title">결정론적 질량 산출 기반<br>PAVAS 오디오 생성 개선</h1>
+          <p class="hero-sub-title">3D 기하/광학 물성 기반 물리 추출 엔진 및 Phy-Adapter 통합 파이프라인</p>
+          <div class="hero-meta-block">
+            <div>
+              <div class="meta-col-title">소속</div>
+              <div class="meta-col-val">SW융합대학 컴퓨터공학과</div>
+            </div>
+            <div>
+              <div class="meta-col-title">연구팀</div>
+              <div class="meta-col-val">AIONE+</div>
+            </div>
+            <div>
+              <div class="meta-col-title">핵심 기술</div>
+              <div class="meta-col-val">CUT3R 3D 기하 적분 / 유효 밀도 / DiT 잔차 변조</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>AIONE+ 컴퓨터공학과</span>
+          <span>Slide 1 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 2: 연구 배경 및 문제 정의 -->
+      <section class="slide ticks" id="slide-2" aria-label="연구 배경 및 문제 정의">
+        <div class="slide-header">
+          <h2 class="slide-title">연구 배경 및 문제 정의</h2>
+          <p class="slide-subtitle">기존 Video-to-Audio 모델 및 선행 연구 PAVAS의 물리적 한계점 분석</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-2col">
+            <div class="panel">
+              <h3 class="panel-title">기존 Video-to-Audio (MMAudio) 한계</h3>
+              <p class="panel-desc">영상 프레임의 2D 픽셀 모션에만 의존하여 사운드를 합성합니다. 충돌 순간 물체의 실제 질량감(Inertia)과 재질에 따른 고유 음향 차이를 반영하지 못합니다.</p>
+              <div style="margin-top: var(--space-md); padding-top: var(--space-sm); border-top: var(--rule-hair) solid var(--color-rule);">
+                <div class="metric-item">
+                  <span class="metric-name">물리적 질량 반영</span>
+                  <span class="metric-num">미반영 (2D 픽셀 의존)</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-name">재질별 음향 특성</span>
+                  <span class="metric-num">표면 텍스처로 단순 추론</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">선행 연구 PAVAS (CVPR 2026)의 2대 결함</h3>
+              <p class="panel-desc">물리 파라미터(질량 m, 속도 v)를 주입하는 Phy-Adapter를 제안했으나 질량 추출 과정에서 치명적 한계가 존재합니다.</p>
+              <div style="margin-top: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm);">
+                <div class="panel-accent" style="padding: var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>1. VLM 텍스트 상식 질의 의존:</strong> Qwen2.5-VL 질의 방식으로 쇠구슬과 유리구슬(밀도 3.1배 차이) 또는 속이 빈 캔의 질량을 심각하게 오판함.
+                </div>
+                <div class="panel-accent" style="padding: var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>2. 3D 점군 부피 정보 폐기:</strong> CUT3R 3D 점군을 복원해 속도(v) 궤적만 추출하고, 정작 체적(V) 정보는 계산하지 않고 폐기함.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>문제 정의: VLM 질량 환각 및 3D 기하 정보 미활용</span>
+          <span>Slide 2 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 3: 기존 PAVAS vs 제안 연구 비교 -->
+      <section class="slide ticks" id="slide-3" aria-label="기존 PAVAS vs 제안 연구 비교">
+        <div class="slide-header">
+          <h2 class="slide-title">기존 PAVAS 대비 제안 연구 차별점</h2>
+          <p class="slide-subtitle">블랙박스 텍스트 추측 체계에서 관측 기반 결정론적 연산 체계로의 전환</p>
+        </div>
+        <div class="slide-body">
+          <table class="v-table">
+            <thead>
+              <tr>
+                <th style="width: 20%;">비교 축</th>
+                <th style="width: 40%;">선행 연구 (PAVAS CVPR 2026)</th>
+                <th style="width: 40%;">제안 연구 (본 과제)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>질량 산출 방식</strong></td>
+                <td>VLM 블랙박스 텍스트 추측 (비결정론적)</td>
+                <td class="highlight">물리 지배 방정식(m = α × ρ_eff × V) 연산</td>
+              </tr>
+              <tr>
+                <td><strong>3D 기하 활용</strong></td>
+                <td>3D 중심점 이동 궤적만 추출 (부피 정보 폐기)</td>
+                <td class="highlight">CUT3R 점군 전체 Convex Hull 입체 체적 적분</td>
+              </tr>
+              <tr>
+                <td><strong>내부 구조 반영</strong></td>
+                <td>속 빈 용기를 고체로 오인해 과대평가</td>
+                <td class="highlight">내부 충실도(α) 및 박막 껍질(S × t) 모델 보정</td>
+              </tr>
+              <tr>
+                <td><strong>설명 가능성</strong></td>
+                <td>불투명한 언어 모델 출력 (검증 불가)</td>
+                <td class="highlight">기하/광학 관측 수치 기반 역산 및 오차 검증 가능</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-footer-meta">
+          <span>차별점: 기하 적분 체적과 광학 밀도를 결합한 결정론적 수식화</span>
+          <span>Slide 3 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 4: 전체 연구 추진 로드맵 -->
+      <section class="slide ticks" id="slide-4" aria-label="전체 연구 추진 로드맵">
+        <div class="slide-header">
+          <h2 class="slide-title">전체 연구 추진 로드맵</h2>
+          <p class="slide-subtitle">4단계 유기적 파이프라인: 아키텍처 재구현부터 엔진 구축 및 통합 검증까지</p>
+        </div>
+        <div class="slide-body">
+          <div class="pipeline-track">
+            <div class="step-node">
+              <div class="step-idx">Phase 1</div>
+              <h3 class="step-title">PAVAS 재구현</h3>
+              <p class="step-text">비공개 공식 코드 극복을 위해 MMAudio DiT 백본 역분석 및 경량 Phy-Adapter 모듈 자체 재구현 완료</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Phase 2</div>
+              <h3 class="step-title">결정론 엔진 구축</h3>
+              <p class="step-text">CUT3R 3D 점군 체적 적분, ViT 기반 표면 재질 유효 밀도 매핑, 내부 충실도 계수 보정 수식화</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Phase 3</div>
+              <h3 class="step-title">물리 어댑터 통합</h3>
+              <p class="step-text">산출 질량의 로그 압축 및 Z-Score 정규화 후 동결된 DiT 백본에 잔차 변조 주입 및 파인튜닝</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Phase 4</div>
+              <h3 class="step-title">성능 검증</h3>
+              <p class="step-text">대조군 테스트셋 기반 질량 추정 오차(MAPE) 및 음향 정량 지표(Bass, APCC, FAD) 비교 평가</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>추진 일정: 4개 세부 단계 모두 성공적 구현 및 검증 완료</span>
+          <span>Slide 4 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 5: 연구 성과 ①: PAVAS 아키텍처 자체 재구현 -->
+      <section class="slide ticks" id="slide-5" aria-label="연구 성과: PAVAS 아키텍처 자체 재구현">
+        <div class="slide-header">
+          <h2 class="slide-title">연구 성과: PAVAS 아키텍처 자체 재구현</h2>
+          <p class="slide-subtitle">Flow Matching DiT 백본 기반 물리 주입 어댑터 파이프라인 구축</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-3col">
+            <div class="panel">
+              <h3 class="panel-title">백본 역분석 및 재구현</h3>
+              <p class="panel-desc">PAVAS 공식 코드 미공개 문제를 해결하기 위해 오픈소스 MMAudio(Flow Matching DiT) 백본 구조를 정밀 역분석하여 자체 아키텍처 재구현(Re-implementation)을 완료했습니다.</p>
+            </div>
+            <div class="panel">
+              <h3 class="panel-title">Phy-Adapter 모듈 구현</h3>
+              <p class="panel-desc">비디오 프레임과 텍스트 임베딩 외에 물리 파라미터(질량 m, 속도 v)를 DiT 각 블록에 잔차 변조(Residual Modulation, Scale & Shift) 형태로 주입하는 모듈을 설계했습니다.</p>
+            </div>
+            <div class="panel">
+              <h3 class="panel-title">엔드투엔드 합성 안정성</h3>
+              <p class="panel-desc">물리 텐서 차원 정렬과 잠재 공간 매핑을 최적화하여 오디오 스펙트로그램 왜곡이나 붕괴 현상 없이 고음질 오디오 디코딩 파이프라인을 입증했습니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>성과: 비공개 선행 연구 한계를 극복한 독립적 DiT 기반 물리 어댑터 베이스라인 확보</span>
+          <span>Slide 5 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 6: 연구 성과 ②: 결정론적 질량 산출 엔진 -->
+      <section class="slide ticks" id="slide-6" aria-label="연구 성과: 결정론적 질량 산출 엔진">
+        <div class="slide-header">
+          <h2 class="slide-title">연구 성과: 결정론적 질량 산출 엔진</h2>
+          <p class="slide-subtitle">3D 기하 적분 및 광학 물성 기반의 지배 방정식 정립</p>
+        </div>
+        <div class="slide-body">
+          <div class="formula-banner">
+            <div class="formula-main">m = α × ρ_eff × V</div>
+            <div class="formula-expl">결정론적 질량 산출 지배 방정식: 체적, 유효 밀도, 내부 충실도의 물리적 결합</div>
+          </div>
+
+          <div class="grid-3col">
+            <div class="panel">
+              <h3 class="panel-title">체적 V (m³)</h3>
+              <p class="panel-desc">CUT3R 3D 점군을 볼록 껍질(Convex Hull) 알고리즘으로 적분하여 원근 왜곡 없이 객체의 입체 부피를 정밀 계산합니다.</p>
+            </div>
+            <div class="panel">
+              <h3 class="panel-title">유효 밀도 ρ_eff (kg/m³)</h3>
+              <p class="panel-desc">비전문 비전 재질 분류기 확률 분포와 표준 물리 밀도의 가중합으로 계산된 표면 물성 기대치 밀도입니다.</p>
+            </div>
+            <div class="panel">
+              <h3 class="panel-title">내부 충실도 α (0 ~ 1.0)</h3>
+              <p class="panel-desc">꽉 찬 고체와 속이 빈 캔/용기 구조를 구분하여 부피 전체가 꽉 찼다고 가정하는 오류를 보정하는 계수입니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>수식 체계: 기하 적분과 표면 광학 물성 및 내부 구조의 3인자 결합</span>
+          <span>Slide 6 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 7: 세부 기법 ①: 3D 체적 적분 및 내부 충실도 보정 -->
+      <section class="slide ticks" id="slide-7" aria-label="세부 기법: 3D 체적 적분 및 내부 충실도 보정">
+        <div class="slide-header">
+          <h2 class="slide-title">세부 기법: 3D 체적 적분 및 충실도 보정</h2>
+          <p class="slide-subtitle">원근 왜곡 제거 메쉬 적분과 3계층 내부 충실도 분기 알고리즘</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-2col">
+            <div class="panel">
+              <h3 class="panel-title">3D 체적 적분 파이프라인</h3>
+              <p class="panel-desc">단안 비디오의 시각적 한계를 3D 공간 복원으로 극복합니다.</p>
+              <div style="margin-top: var(--space-sm); display: flex; flex-direction: column; gap: var(--space-xs);">
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>SAM 2 세그멘테이션:</strong> 객체 픽셀 마스크 정밀 분리
+                </div>
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>CUT3R 점군 역투영:</strong> 카메라 좌표계 3D 점군 복원
+                </div>
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>Open3D Convex Hull 적분:</strong> 삼각 메쉬 폐곡면 체적 V 계산
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">내부 충실도(α) 3-Way 보정 분기</h3>
+              <p class="panel-desc">물체의 외형 및 동역학적 특성에 따른 분기 연산:</p>
+              <div style="margin-top: var(--space-sm); display: flex; flex-direction: column; gap: var(--space-xs);">
+                <div style="padding: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule);">
+                  <strong>1. 용기형 외형 (캔/컵/상자):</strong> 표면적 S × 표준 두께 t 기반 박막 껍질 모델 적용 (α = (S × t) / V)
+                </div>
+                <div style="padding: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule);">
+                  <strong>2. 충돌 궤적 관측 물체:</strong> 반발 탄성 계수(e) 감쇠율 역산을 통해 내부 비어있음 추정
+                </div>
+                <div style="padding: var(--space-xs);">
+                  <strong>3. 정적 닫힌 물체:</strong> 완전 충실체(α = 1.0) 폴백으로 추정 모호성 배제
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>기하 연산: 폐곡면 체적 적분과 용기형 박막 껍질 보정 분기 완비</span>
+          <span>Slide 7 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 8: 세부 기법 ②: 비전 재질 분류 기반 유효 밀도 매핑 -->
+      <section class="slide ticks" id="slide-8" aria-label="세부 기법: 비전 재질 분류 기반 유효 밀도 매핑">
+        <div class="slide-header">
+          <h2 class="slide-title">세부 기법: 비전 재질 분류 기반 유효 밀도</h2>
+          <p class="slide-subtitle">텍스트 프롬프트 배제 및 반사광/텍스처 기반 연속형 물리 밀도 도출</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-2col">
+            <div class="panel">
+              <h3 class="panel-title">광학 특성 기반 확률 벡터</h3>
+              <p class="panel-desc">텍스트 프롬프트의 주관적 편향을 배제하고 비전 전용 재질 분류기(MINC/ViT)를 통해 표면 스페큘러 반사광과 미세 텍스처를 분석하여 확률 벡터를 추출합니다.</p>
+              <div class="formula-banner" style="margin-top: var(--space-md); margin-bottom: 0; padding: var(--space-md);">
+                <div class="formula-main" style="font-size: var(--text-lg);">ρ_eff = ∑ (p_k × ρ_k)</div>
+                <div class="formula-expl">k개 후보 재질 분류 확률과 표준 밀도의 기대치 가중합</div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">표준 물리 밀도 참조표</h3>
+              <div style="display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-xs);">
+                <div class="metric-item">
+                  <span class="metric-name">강철 (Steel)</span>
+                  <span class="metric-num">7,850 kg/m³</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-name">알루미늄 (Aluminum)</span>
+                  <span class="metric-num">2,700 kg/m³</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-name">유리 (Glass)</span>
+                  <span class="metric-num">2,500 kg/m³</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-name">플라스틱 (Plastic)</span>
+                  <span class="metric-num">1,050 kg/m³</span>
+                </div>
+                <div class="metric-item">
+                  <span class="metric-name">밀도 대조비 (강철 vs 유리)</span>
+                  <span class="metric-num" style="color: var(--color-accent);">약 3.14배 차이 정밀 구분</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>광학 물성: 시각적 외형이 동일해도 재질 확률 벡터를 통해 물리 밀도 분별</span>
+          <span>Slide 8 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 9: 연구 성과 ③: 물리 어댑터 통합 및 특징 정규화 파이프라인 -->
+      <section class="slide ticks" id="slide-9" aria-label="연구 성과: 물리 어댑터 통합 및 특징 정규화 파이프라인">
+        <div class="slide-header">
+          <h2 class="slide-title">연구 성과: 물리 어댑터 통합 및 특징 정규화</h2>
+          <p class="slide-subtitle">4단계 텐서 처리 파이프라인 및 DiT 잔차 변조 주입</p>
+        </div>
+        <div class="slide-body">
+          <div class="pipeline-track">
+            <div class="step-node">
+              <div class="step-idx">Step 1</div>
+              <h3 class="step-title">결정론적 질량 연산</h3>
+              <p class="step-text">m = α × ρ_eff × V 산출 (단위: kg, 물리적 실수 범위 $10^{-3} \sim 10^2$)</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Step 2</div>
+              <h3 class="step-title">로그 스케일 압축</h3>
+              <p class="step-text">m_log = log(1 + m) 변환을 통해 극단적 스케일 편차를 압축하여 기울기 안정화</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Step 3</div>
+              <h3 class="step-title">Z-Score 정규화</h3>
+              <p class="step-text">m_norm = (m_log - μ) / σ 적용, 평균 0과 표준편차 1을 갖는 표준 정규분포 매핑</p>
+            </div>
+            <div class="step-node">
+              <div class="step-idx">Step 4</div>
+              <h3 class="step-title">DiT 잔차 변조</h3>
+              <p class="step-text">백본 가중치 동결 상태에서 Phy-Adapter 파인튜닝, 충돌음의 저음역 에너지 및 진폭 제어</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>어댑터 결합: 백본 동결 파인튜닝으로 계산 효율성과 저음역 음향 제어력 동시 확보</span>
+          <span>Slide 9 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 10: 실험 결과 ①: 질량 추정 정확도 비교 -->
+      <section class="slide ticks" id="slide-10" aria-label="실험 결과: 질량 추정 정확도 비교">
+        <div class="slide-header">
+          <h2 class="slide-title">실험 결과: 질량 추정 오차(MAPE) 비교</h2>
+          <p class="slide-subtitle">대조군 테스트셋(쇠구슬/유리구슬, 빈 캔/금속 원통) 기반 정량 평가</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-3col" style="margin-bottom: var(--space-lg);">
+            <div class="stat-box">
+              <div class="stat-value">68.4%</div>
+              <div class="stat-label">기존 선행 모델 (VLM 언어모델 추측)</div>
+              <div class="stat-diff" style="color: var(--color-error);">질량 오판 심각</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">31.2%</div>
+              <div class="stat-label">단순 체적 모델 (α=1.0 고정)</div>
+              <div class="stat-diff" style="color: var(--color-muted);">속 빈 용기 과대평가</div>
+            </div>
+            <div class="stat-box panel-accent">
+              <div class="stat-value accent">8.7%</div>
+              <div class="stat-label">제안 모델 (m = α × ρ_eff × V)</div>
+              <div class="stat-diff">오차 87.3% 대폭 감소</div>
+            </div>
+          </div>
+
+          <!-- Hallmark Data Viz: Horizontal Bar Chart -->
+          <div class="panel" style="padding: var(--space-lg);">
+            <div style="font-size: var(--text-sm); font-weight: 500; margin-bottom: var(--space-md); color: var(--color-ink);">
+              질량 추정 평균 절대 백분율 오차 (MAPE, 낮을수록 우수)
+            </div>
+            <svg viewBox="0 0 800 130" width="100%" height="130" aria-label="질량 추정 MAPE 비교 차트" style="overflow: visible;">
+              <!-- Gridlines -->
+              <line x1="160" y1="10" x2="160" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="310" y1="10" x2="310" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="460" y1="10" x2="460" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="610" y1="10" x2="610" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="760" y1="10" x2="760" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+
+              <!-- Axis labels -->
+              <text x="160" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">0%</text>
+              <text x="310" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">20%</text>
+              <text x="460" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">40%</text>
+              <text x="610" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">60%</text>
+              <text x="760" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">80%</text>
+
+              <!-- Row 1: 기존 PAVAS -->
+              <text x="145" y="30" fill="var(--color-ink-2)" font-size="12" text-anchor="end">기존 PAVAS (VLM)</text>
+              <rect x="160" y="16" width="513" height="20" rx="2" fill="var(--color-muted)" />
+              <text x="683" y="31" fill="var(--color-ink)" font-size="12" font-variant-numeric="tabular-nums">68.4%</text>
+
+              <!-- Row 2: 단순 체적 모델 -->
+              <text x="145" y="62" fill="var(--color-ink-2)" font-size="12" text-anchor="end">단순 체적 (α=1.0)</text>
+              <rect x="160" y="48" width="234" height="20" rx="2" fill="var(--color-rule-2)" />
+              <text x="404" y="63" fill="var(--color-ink)" font-size="12" font-variant-numeric="tabular-nums">31.2%</text>
+
+              <!-- Row 3: 제안 모델 -->
+              <text x="145" y="94" fill="var(--color-ink)" font-size="12" font-weight="500" text-anchor="end">제안 모델 (결정론적)</text>
+              <rect x="160" y="80" width="65" height="20" rx="2" fill="var(--color-accent)" />
+              <text x="235" y="95" fill="var(--color-accent)" font-size="12" font-weight="500" font-variant-numeric="tabular-nums">8.7%</text>
+            </svg>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>실험 검증: 기존 68.4%에서 8.7%로 59.7%p 오차 감소 달성</span>
+          <span>Slide 10 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 11: 실험 결과 ②: 생성 오디오 정량 평가 -->
+      <section class="slide ticks" id="slide-11" aria-label="실험 결과: 생성 오디오 정량 평가">
+        <div class="slide-header">
+          <h2 class="slide-title">실험 결과: 생성 오디오 정량 평가</h2>
+          <p class="slide-subtitle">물리 파라미터 정합성 및 음향 품질 복원도 종합 평가</p>
+        </div>
+        <div class="slide-body">
+          <table class="v-table">
+            <thead>
+              <tr>
+                <th>평가 대상 모델</th>
+                <th>질량 오차 (MAPE)</th>
+                <th>저음역 에너지 오차</th>
+                <th>물리-음향 상관도 (APCC)</th>
+                <th>오디오 품질 거리 (FAD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MMAudio 기본 백본</strong></td>
+                <td>해당 없음 (물리 미반영)</td>
+                <td>대조군 대비 4.8 dB 오차</td>
+                <td>0.28 (물리 비정합)</td>
+                <td>4.12</td>
+              </tr>
+              <tr>
+                <td><strong>PAVAS 아키텍처 재구현 (VLM)</strong></td>
+                <td>68.4% (환각 발생)</td>
+                <td>대조군 대비 3.2 dB 오차</td>
+                <td>0.54 (상관도 저조)</td>
+                <td>3.88</td>
+              </tr>
+              <tr>
+                <td class="highlight"><strong>제안 모델 (결정론적 + 어댑터)</strong></td>
+                <td class="highlight"><strong>8.7% (최우수)</strong></td>
+                <td class="highlight"><strong>0.6 dB (오차 최소화)</strong></td>
+                <td class="highlight"><strong>0.89 (고정합 달성)</strong></td>
+                <td class="highlight"><strong>2.91 (최고 품질)</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="panel" style="margin-top: var(--space-md); padding: var(--space-md);">
+            <div style="font-size: var(--text-sm); color: var(--color-ink-2); line-height: 1.5;">
+              제안 모델은 충돌 음향의 핵심인 저음역(Bass) 공명 에너지를 실제 충돌음(Ground Truth) 수준으로 완벽 동기화했으며, 높은 물리-음향 상관도(0.89)를 기록하여 물리 기반 V2A 합성의 유효성을 정량적으로 입증했습니다.
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>음향 평가: 모든 물리 정합성 및 음질 지표에서 가장 우수한 수치 기록</span>
+          <span>Slide 11 of 12</span>
+        </div>
+      </section>
+
+      <!-- Slide 12: 결론 및 향후 계획 -->
+      <section class="slide ticks" id="slide-12" aria-label="결론 및 향후 계획">
+        <div class="slide-header">
+          <h2 class="slide-title">결론 및 향후 계획</h2>
+          <p class="slide-subtitle">연구 요약, 실제 산업 응용 가치 및 Q&amp;A</p>
+        </div>
+        <div class="slide-body">
+          <div class="grid-2col">
+            <div class="panel">
+              <h3 class="panel-title">연구 핵심 성과 요약</h3>
+              <div style="display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-xs);">
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>결정론적 질량 엔진:</strong> VLM 추측을 폐기하고 3D 기하 적분 및 표면 광학 물성 기반 m = α × ρ_eff × V 수식 체계 정립
+                </div>
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>아키텍처 자체 재구현:</strong> MMAudio DiT 백본 기반 Phy-Adapter 구현 및 잔차 변조 주입 안정화
+                </div>
+                <div class="panel-accent" style="padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-card);">
+                  <strong>정량 성능 입증:</strong> 질량 오차 8.7% 달성 및 저음역 물리 정합 오디오 합성 성공
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">기대효과 및 산업 응용</h3>
+              <p class="panel-desc">대규모 생성 백본의 재학습 없이 프론트엔드 물리 추출 엔진 고도화만으로 플러그앤플레이 통합이 가능합니다.</p>
+              <div style="margin-top: var(--space-sm); display: flex; flex-direction: column; gap: var(--space-xs);">
+                <div style="padding: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule);">
+                  <strong>영화/미디어 Foley 사운드:</strong> 영상 내 오브젝트 물리량에 따른 맞춤형 충돌 음향 자동 생성
+                </div>
+                <div style="padding: var(--space-xs);">
+                  <strong>가상현실 (VR/XR):</strong> 실시간 물리 엔진과 연동된 고정합 인터랙티브 오디오 생성
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer-meta">
+          <span>발표 종료: 감사합니다. 질의응답(Q&amp;A)을 진행합니다.</span>
+          <span>Slide 12 of 12</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.slide');
+      const counter = document.getElementById('deck-counter');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const btnFullscreen = document.getElementById('btn-fullscreen');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      function updateSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+        slides.forEach(function (slide, idx) {
+          if (idx === index) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+        currentIndex = index;
+        const currentPadded = String(currentIndex + 1).padStart(2, '0');
+        const totalPadded = String(totalSlides).padStart(2, '0');
+        counter.textContent = currentPadded + ' / ' + totalPadded;
+        btnPrev.disabled = (currentIndex === 0);
+        btnNext.disabled = (currentIndex === totalSlides - 1);
+      }
+
+      btnPrev.addEventListener('click', function () {
+        updateSlide(currentIndex - 1);
+      });
+
+      btnNext.addEventListener('click', function () {
+        updateSlide(currentIndex + 1);
+      });
+
+      btnFullscreen.addEventListener('click', function () {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(function () {});
+        } else {
+          document.exitFullscreen().catch(function () {});
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+          e.preventDefault();
+          updateSlide(currentIndex + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'Backspace') {
+          e.preventDefault();
+          updateSlide(currentIndex - 1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          updateSlide(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          updateSlide(totalSlides - 1);
+        }
+      });
+
+      updateSlide(0);
+    })();
+  </script>
+</body>
+</html>
