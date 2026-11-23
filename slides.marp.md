@@ -134,18 +134,18 @@ style: |
 ## 4. 연구 성과 ①: PAVAS 아키텍처 자체 재구현
 
 <div class="box">
-  <h3>MMAudio Flow Matching DiT 백본 역분석 및 재구현</h3>
-  <p>PAVAS 공식 코드 미공개 문제를 해결하기 위해 오픈소스 MMAudio 백본을 정밀 역분석하여 <strong>자체 아키텍처 재구현(Re-implementation)</strong>을 완료했습니다.</p>
+  <h3>하드웨어 제약 극복 및 PAVAS 축소 모델 구현</h3>
+  <p>자체 재구현을 진행하며 하드웨어(저장공간 및 그래픽카드) 차이 이슈가 발생하여, 가용 환경에 맞추어 <strong>PAVAS 모델 축소 모델</strong>로 최적화 구현했습니다.</p>
 </div>
 
 <div class="box">
-  <h3>경량 Phy-Adapter 모듈 설계 및 잔차 변조</h3>
-  <p>비디오 프레임 및 텍스트 임베딩과 함께 질량($m$)과 속도($v$)를 잔차 변조(Residual Modulation: Scale & Shift) 형태로 DiT 블록에 주입합니다.</p>
+  <h3>Vision-UP 데이터 10% 학습을 통한 아키텍처 재구현 성공</h3>
+  <p>Vision-UP 기간 내 데이터를 모델 학습에 활용하여 <strong>약 10% 정도의 학습</strong>을 성공적으로 수행하였으며, 이를 통해 핵심 아키텍처 재구현을 완료했습니다.</p>
 </div>
 
 <div class="box">
-  <h3>엔드투엔드 파이프라인 검증 완료</h3>
-  <p>물리 텐서 차원 정렬 최적화를 통해 오디오 파형 왜곡 및 스펙트로그램 붕괴 없이 안정적인 디코딩 합성을 달성했습니다.</p>
+  <h3>경량 Phy-Adapter 모듈 잔차 변조 및 파이프라인 검증</h3>
+  <p>축소 모델 환경에서도 질량($m$)과 속도($v$)를 DiT 블록에 잔차 변조(Residual Modulation) 형태로 안정 주입하여, 왜곡 없는 오디오 합성 파이프라인을 검증했습니다.</p>
 </div>
 
 ---
@@ -222,23 +222,19 @@ style: |
 
 | 추정 방식 | MAPE (%) | 평가 결과 |
 | :--- | :---: | :--- |
-| 기존 PAVAS (Qwen2.5-VL 텍스트 추측) | **68.4%** | VLM 환각으로 인한 극심한 질량 오판 |
+| 아키텍처 재구현 모델 (Qwne2.5모델 추측) | **68.4%** | VLM 환각으로 인한 극심한 질량 오판 |
 | 단순 체적 모델 ($\alpha=1.0$ 고정) | **31.2%** | 속 빈 용기 질량 과대평가 한계 |
 | **제안 모델 ($m = \alpha \cdot \rho_{\text{eff}} \cdot V$)** | <span class="highlight">8.7%</span> | **오차 59.7%p 대폭 감소 (87.3% 개선)** |
 
 ---
 
-<!-- Slide 11: 실험 결과 ②: 생성 오디오 정량 평가 -->
-## 10. 실험 결과 ②: 생성 오디오 정량 평가
+<!-- Slide 11: 특정상황 개선 결과 및 시연 -->
+## 10. 특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다
 
-| 모델 구분 | 질량 오차 (MAPE) | 저음역 에너지 오차 | 물리-음향 상관도 (APCC) | 오디오 품질 (FAD) |
-| :--- | :---: | :---: | :---: | :---: |
-| MMAudio 기본 백본 | 미반영 | 4.8 dB | 0.28 | 4.12 |
-| PAVAS 아키텍처 재구현 | 68.4% | 3.2 dB | 0.54 | 3.88 |
-| **제안 모델 (결정론적+Phy-Adapter)** | <span class="highlight">8.7%</span> | <span class="highlight">0.6 dB</span> | <span class="highlight">0.89</span> | <span class="highlight">2.91</span> |
-
-- **물리적 정합성:** 충돌 음향의 핵심인 저음역(Bass) 에너지를 Ground Truth 수준(0.6 dB)으로 동기화
-- **음향 품질:** FAD 2.91 달성으로 인공적 왜곡 없이 자연스러운 고품질 오디오 합성 검증
+<div class="box" style="height: 420px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px dashed #363b47; text-align: center; border-radius: 8px;">
+  <p style="font-size: 26px; color: #8b92a0; margin-bottom: 12px;">🎬 예시 영상 삽입 영역</p>
+  <p style="font-size: 16px; color: #555e70;">(이 영역에 질량이 큰 물체의 충돌 비교 시연 영상을 삽입하세요)</p>
+</div>
 
 ---
 

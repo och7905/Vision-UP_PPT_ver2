@@ -182,26 +182,26 @@
       <section class="slide ticks" id="slide-5" aria-label="연구 성과: PAVAS 아키텍처 자체 재구현">
         <div class="slide-header">
           <h2 class="slide-title">연구 성과: PAVAS 아키텍처 자체 재구현</h2>
-          <p class="slide-subtitle">Flow Matching DiT 백본 기반 물리 주입 어댑터 파이프라인 구축</p>
+          <p class="slide-subtitle">하드웨어 제약 극복을 위한 축소 모델 구현 및 Vision-UP 데이터 10% 학습 검증</p>
         </div>
         <div class="slide-body">
           <div class="grid-3col">
             <div class="panel">
-              <h3 class="panel-title">백본 역분석 및 재구현</h3>
-              <p class="panel-desc">PAVAS 공식 코드 미공개 문제를 해결하기 위해 오픈소스 MMAudio(Flow Matching DiT) 백본 구조를 정밀 역분석하여 자체 아키텍처 재구현(Re-implementation)을 완료했습니다.</p>
+              <h3 class="panel-title">하드웨어 제약 극복 축소 모델</h3>
+              <p class="panel-desc">자체 재구현을 진행하며 하드웨어(저장공간 및 그래픽카드) 차이 이슈로 인해, 가용 환경에 최적화된 <strong>PAVAS 모델 축소 모델</strong>로 구현했습니다.</p>
             </div>
             <div class="panel">
-              <h3 class="panel-title">Phy-Adapter 모듈 구현</h3>
-              <p class="panel-desc">비디오 프레임과 텍스트 임베딩 외에 물리 파라미터(질량 m, 속도 v)를 DiT 각 블록에 잔차 변조(Residual Modulation, Scale & Shift) 형태로 주입하는 모듈을 설계했습니다.</p>
+              <h3 class="panel-title">Vision-UP 데이터 10% 학습 성공</h3>
+              <p class="panel-desc">Vision-UP 기간 내 데이터를 모델 학습에 활용하여 <strong>약 10% 정도의 학습</strong>을 수행하였으며, 이를 통해 핵심 아키텍처 재구현을 성공적으로 완료했습니다.</p>
             </div>
             <div class="panel">
-              <h3 class="panel-title">엔드투엔드 합성 안정성</h3>
-              <p class="panel-desc">물리 텐서 차원 정렬과 잠재 공간 매핑을 최적화하여 오디오 스펙트로그램 왜곡이나 붕괴 현상 없이 고음질 오디오 디코딩 파이프라인을 입증했습니다.</p>
+              <h3 class="panel-title">경량 Phy-Adapter 잔차 변조</h3>
+              <p class="panel-desc">축소 모델 환경에서도 물리 파라미터(질량 m, 속도 v)를 DiT 각 블록에 잔차 변조(Residual Modulation) 형태로 주입하여 파형 왜곡 없는 정상 합성을 검증했습니다.</p>
             </div>
           </div>
         </div>
         <div class="slide-footer-meta">
-          <span>성과: 비공개 선행 연구 한계를 극복한 독립적 DiT 기반 물리 어댑터 베이스라인 확보</span>
+          <span>성과: 하드웨어(저장공간/GPU) 제약 극복 · PAVAS 축소 모델 구현 및 Vision-UP 10% 학습 성공</span>
           <span>Slide 5 of 12</span>
         </div>
       </section>
@@ -382,7 +382,7 @@
           <div class="grid-3col" style="margin-bottom: var(--space-lg);">
             <div class="stat-box">
               <div class="stat-value">68.4%</div>
-              <div class="stat-label">기존 선행 모델 (VLM 언어모델 추측)</div>
+              <div class="stat-label">아키텍처 재구현 모델 (Qwne2.5모델 추측)</div>
               <div class="stat-diff" style="color: var(--color-error);">질량 오판 심각</div>
             </div>
             <div class="stat-box">
@@ -417,8 +417,8 @@
               <text x="610" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">60%</text>
               <text x="760" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">80%</text>
 
-              <!-- Row 1: 기존 PAVAS -->
-              <text x="145" y="30" fill="var(--color-ink-2)" font-size="12" text-anchor="end">기존 PAVAS (VLM)</text>
+              <!-- Row 1: 재구현 모델 -->
+              <text x="145" y="30" fill="var(--color-ink-2)" font-size="12" text-anchor="end">재구현 모델 (Qwen2.5)</text>
               <rect x="160" y="16" width="513" height="20" rx="2" fill="var(--color-muted)" />
               <text x="683" y="31" fill="var(--color-ink)" font-size="12" font-variant-numeric="tabular-nums">68.4%</text>
 
@@ -440,55 +440,26 @@
         </div>
       </section>
 
-      <!-- Slide 11: 실험 결과 ②: 생성 오디오 정량 평가 -->
-      <section class="slide ticks" id="slide-11" aria-label="실험 결과: 생성 오디오 정량 평가">
+      <!-- Slide 11: 특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다 -->
+      <section class="slide ticks" id="slide-11" aria-label="특정상황 질량이 큰 물체의 충돌 영상 개선">
         <div class="slide-header">
-          <h2 class="slide-title">실험 결과: 생성 오디오 정량 평가</h2>
-          <p class="slide-subtitle">물리 파라미터 정합성 및 음향 품질 복원도 종합 평가</p>
+          <h2 class="slide-title">특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다</h2>
+          <p class="slide-subtitle">고중량 물체 충돌 음향 합성 품질 개선 결과 및 비교 시연</p>
         </div>
         <div class="slide-body">
-          <table class="v-table">
-            <thead>
-              <tr>
-                <th>평가 대상 모델</th>
-                <th>질량 오차 (MAPE)</th>
-                <th>저음역 에너지 오차</th>
-                <th>물리-음향 상관도 (APCC)</th>
-                <th>오디오 품질 거리 (FAD)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>MMAudio 기본 백본</strong></td>
-                <td>해당 없음 (물리 미반영)</td>
-                <td>대조군 대비 4.8 dB 오차</td>
-                <td>0.28 (물리 비정합)</td>
-                <td>4.12</td>
-              </tr>
-              <tr>
-                <td><strong>PAVAS 아키텍처 재구현 (VLM)</strong></td>
-                <td>68.4% (환각 발생)</td>
-                <td>대조군 대비 3.2 dB 오차</td>
-                <td>0.54 (상관도 저조)</td>
-                <td>3.88</td>
-              </tr>
-              <tr>
-                <td class="highlight"><strong>제안 모델 (결정론적 + 어댑터)</strong></td>
-                <td class="highlight"><strong>8.7% (최우수)</strong></td>
-                <td class="highlight"><strong>0.6 dB (오차 최소화)</strong></td>
-                <td class="highlight"><strong>0.89 (고정합 달성)</strong></td>
-                <td class="highlight"><strong>2.91 (최고 품질)</strong></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="panel" style="margin-top: var(--space-md); padding: var(--space-md);">
-            <div style="font-size: var(--text-sm); color: var(--color-ink-2); line-height: 1.5;">
-              제안 모델은 충돌 음향의 핵심인 저음역(Bass) 공명 에너지를 실제 충돌음(Ground Truth) 수준으로 완벽 동기화했으며, 높은 물리-음향 상관도(0.89)를 기록하여 물리 기반 V2A 합성의 유효성을 정량적으로 입증했습니다.
+          <!-- 예시 영상 삽입 영역 (비워둠) -->
+          <div class="panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 420px; border: 2px dashed var(--color-rule-2); background: rgba(28, 32, 39, 0.4); border-radius: var(--radius-card); text-align: center;">
+            <div style="font-size: 40px; margin-bottom: var(--space-sm); opacity: 0.7;">🎬</div>
+            <div style="font-size: var(--text-md); font-weight: 500; color: var(--color-ink); margin-bottom: var(--space-xs);">
+              예시 영상 삽입 영역
+            </div>
+            <div style="font-size: var(--text-sm); color: var(--color-muted);">
+              (이곳에 질량이 큰 물체의 충돌 비교 시연 영상을 삽입하세요)
             </div>
           </div>
         </div>
         <div class="slide-footer-meta">
-          <span>음향 평가: 모든 물리 정합성 및 음질 지표에서 가장 우수한 수치 기록</span>
+          <span>실험 검증: 특정상황(질량이 큰 물체 충돌) 시연 영상 비교</span>
           <span>Slide 11 of 12</span>
         </div>
       </section>
