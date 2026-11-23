@@ -1,7 +1,7 @@
-/* Hallmark · shape: feature-ledger · genre: modern-minimal · theme: Vantage (by request) · job: try · draw: academic-presentation-slides-deterministic-0edd
+/* Hallmark · shape: feature-ledger · genre: modern-minimal · theme: Vantage (bolder) · job: try · draw: academic-presentation-slides-deterministic-0edd
  * hero: stage · nav: edge-aligned · footer: mast · imagery: none · signature: point-cloud-volume-density-pipeline · vantage: object/steel
- * axes: dark/grotesk-sans/chromatic-lime · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: S, academic presentation slides; customized layout for 12 slides with data visualization and deterministic physics formulas */
+ * axes: dark/grotesk-sans/vivid-emerald-sage · posture: bold-academic · contrast: pass · fold: pass · v2.2.0 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · Impeccable bolder dial applied */
 /* Hallmark · scope: app */
 @import url("./tokens.css");
 @import url("./base.css");
@@ -45,7 +45,7 @@ body {
 
 .deck-brand {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--text-md);
   letter-spacing: var(--tracking-display);
   color: var(--color-ink);
@@ -65,26 +65,29 @@ body {
 .deck-counter {
   font-variant-numeric: tabular-nums;
   font-size: var(--text-sm);
-  color: var(--color-muted);
+  font-weight: 500;
+  color: var(--color-ink-2);
   min-width: 64px;
   text-align: center;
 }
 
 .btn-ctrl {
-  min-height: 44px;
+  min-height: 40px;
   padding-inline: var(--space-md);
   border: var(--rule-hair) solid var(--color-rule-2);
   border-radius: var(--radius-pill);
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-size: var(--text-sm);
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+  transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
 }
 
 .btn-ctrl:hover {
   background-color: var(--color-paper-3);
   border-color: var(--color-muted);
+  color: var(--color-ink);
 }
 
 .btn-ctrl:active {
@@ -98,30 +101,32 @@ body {
 
 .btn-ctrl:disabled,
 .btn-ctrl-primary:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
 .btn-ctrl-primary {
-  min-height: 44px;
+  min-height: 40px;
   padding-inline: var(--space-lg);
   border: 0;
   border-radius: var(--radius-pill);
   background-color: var(--color-accent);
   color: var(--color-accent-ink);
   font-size: var(--text-sm);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color var(--dur-short) var(--ease-out);
+  box-shadow: 0 2px 10px -2px color-mix(in oklab, var(--color-accent) 35%, transparent);
+  transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out);
 }
 
 .btn-ctrl-primary:hover {
   background-color: var(--color-accent-hi);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px -2px color-mix(in oklab, var(--color-accent) 50%, transparent);
 }
 
 .btn-ctrl-primary:active {
-  background-color: var(--color-accent-hi);
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
 .btn-ctrl-primary:focus-visible {
@@ -150,11 +155,12 @@ body {
   width: 100%;
   min-height: var(--slide-height);
   background-color: var(--color-paper-2);
-  border: var(--rule-hair) solid var(--color-rule);
+  border: var(--rule-hair) solid var(--color-rule-2);
   border-radius: var(--radius-card);
   padding: var(--space-xl);
   box-sizing: border-box;
   position: relative;
+  box-shadow: var(--shadow-card);
 }
 
 .slide.active {
@@ -163,7 +169,7 @@ body {
   justify-content: space-between;
 }
 
-/* Vantage Corner Ticks */
+/* Vantage Corner Ticks: Sharp architectural framing */
 .ticks {
   position: relative;
 }
@@ -174,6 +180,7 @@ body {
   inset: 0;
   pointer-events: none;
   border: var(--rule-hair) solid var(--color-rule-2);
+  opacity: 0.45;
   -webkit-mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0 0 / calc(100% - var(--tick)) calc(100% - var(--tick));
   mask: conic-gradient(at var(--tick) var(--tick), transparent 75%, var(--color-ink) 0) 0 0 / calc(100% - var(--tick)) calc(100% - var(--tick));
 }
@@ -181,22 +188,23 @@ body {
 /* Slide Typography & Structure */
 .slide-header {
   margin-bottom: var(--space-lg);
-  border-bottom: var(--rule-hair) solid var(--color-rule);
+  border-bottom: 1.5px solid var(--color-rule-2);
   padding-bottom: var(--space-md);
 }
 
 .slide-title {
   font-size: var(--text-2xl);
-  font-weight: 400;
+  font-weight: 550;
   color: var(--color-ink);
   letter-spacing: var(--tracking-display);
 }
 
 .slide-subtitle {
   font-size: var(--text-md);
-  color: var(--color-muted);
+  color: var(--color-ink-2);
   margin-top: var(--space-xs);
   max-width: 80ch;
+  line-height: 1.5;
 }
 
 .slide-body {
@@ -214,6 +222,7 @@ body {
   padding-top: var(--space-sm);
   border-top: var(--rule-hair) solid var(--color-rule);
   font-size: var(--text-xs);
+  font-weight: 500;
   color: var(--color-muted);
 }
 
@@ -237,22 +246,23 @@ body {
 }
 
 .panel {
-  padding: var(--space-md);
+  padding: var(--space-lg);
   background-color: var(--color-paper);
   color: var(--color-ink);
   border: var(--rule-hair) solid var(--color-rule);
   border-radius: var(--radius-card);
 }
 
+/* Bolder panel accent: Confident hairline and rich contrast background */
 .panel-accent {
-  border-color: var(--color-rule-2);
-  background-color: var(--color-paper-3);
+  border: var(--rule-hair) solid color-mix(in oklab, var(--color-accent) 35%, var(--color-rule-2));
+  background-color: color-mix(in oklab, var(--color-accent) 6%, var(--color-paper));
   color: var(--color-ink);
 }
 
 .panel-title {
-  font-size: var(--text-md);
-  font-weight: 500;
+  font-size: var(--text-lg);
+  font-weight: 600;
   color: var(--color-ink);
   margin-bottom: var(--space-xs);
 }
@@ -260,31 +270,40 @@ body {
 .panel-desc {
   font-size: var(--text-sm);
   color: var(--color-ink-2);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Data Tables */
+/* Data Tables: Bolder distinction of proposed contribution */
 .v-table {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--text-sm);
   background-color: var(--color-paper);
-  border: var(--rule-hair) solid var(--color-rule);
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-radius: var(--radius-card);
+  overflow: hidden;
 }
 
 .v-table th {
   padding: var(--space-sm) var(--space-md);
   text-align: left;
-  background-color: var(--color-paper-3);
+  background-color: var(--color-paper-2);
   color: var(--color-ink);
-  font-weight: 500;
-  border-bottom: var(--rule-hair) solid var(--color-rule-2);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-rule-2);
+}
+
+.v-table th.highlight-head {
+  color: var(--color-accent);
+  border-top: 2px solid var(--color-accent);
+  background-color: color-mix(in oklab, var(--color-accent) 8%, var(--color-paper-2));
 }
 
 .v-table td {
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-md);
   border-bottom: var(--rule-hair) solid var(--color-rule);
   color: var(--color-ink-2);
+  line-height: 1.5;
 }
 
 .v-table tr:last-child td {
@@ -292,69 +311,85 @@ body {
 }
 
 .v-table td.highlight {
-  color: var(--color-accent);
-  font-weight: 500;
+  color: var(--color-ink);
+  font-weight: 600;
+  background-color: color-mix(in oklab, var(--color-accent) 6%, transparent);
+  border-inline: 1px solid color-mix(in oklab, var(--color-accent) 20%, transparent);
 }
 
-/* Math and Formula Blocks */
+/* Math and Formula Blocks: Monumental gravitas */
 .formula-banner {
   background-color: var(--color-paper);
-  border: var(--rule-hair) solid var(--color-rule-2);
+  border: 1.5px solid color-mix(in oklab, var(--color-accent) 45%, var(--color-rule-2));
   border-radius: var(--radius-card);
-  padding: var(--space-lg);
-  margin-bottom: var(--space-md);
+  padding: var(--space-xl) var(--space-2xl);
+  margin-bottom: var(--space-lg);
   text-align: center;
+  box-shadow: 0 4px 20px -4px color-mix(in oklab, var(--color-accent) 15%, transparent);
 }
 
 .formula-main {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: 400;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 600;
   color: var(--color-accent);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
 }
 
 .formula-expl {
-  font-size: var(--text-sm);
-  color: var(--color-muted);
+  font-size: var(--text-md);
+  font-weight: 450;
+  color: var(--color-ink-2);
   margin-top: var(--space-xs);
 }
 
-/* Stat Display Tiles */
+/* Stat Display Tiles: High-conviction focal point */
 .stat-box {
   background-color: var(--color-paper);
-  border: var(--rule-hair) solid var(--color-rule);
+  border: var(--rule-hair) solid var(--color-rule-2);
   border-radius: var(--radius-card);
-  padding: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   text-align: center;
+}
+
+.stat-box.panel-accent {
+  border: 2px solid var(--color-accent);
+  background-color: color-mix(in oklab, var(--color-accent) 8%, var(--color-paper));
+  box-shadow: 0 0 24px -4px color-mix(in oklab, var(--color-accent) 25%, transparent);
 }
 
 .stat-value {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
-  font-weight: 400;
+  font-weight: 550;
   font-variant-numeric: tabular-nums;
   color: var(--color-ink);
   line-height: 1;
 }
 
 .stat-value.accent {
-  color: var(--color-accent);
+  font-size: clamp(3rem, 4.5vw, 3.75rem);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
 }
 
 .stat-label {
   font-size: var(--text-xs);
+  font-weight: 500;
   color: var(--color-muted);
   margin-top: var(--space-xs);
 }
 
 .stat-diff {
   font-size: var(--text-xs);
+  font-weight: 600;
   color: var(--color-accent);
-  margin-top: var(--space-2xs);
+  margin-top: var(--space-xs);
 }
 
-/* Flow Pipeline Nodes */
+/* Flow Pipeline Nodes: Engineering conviction */
 .pipeline-track {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -364,22 +399,20 @@ body {
 
 .step-node {
   background-color: var(--color-paper);
-  border: var(--rule-hair) solid var(--color-rule);
+  border: var(--rule-hair) solid var(--color-rule-2);
+  border-top: 3px solid color-mix(in oklab, var(--color-accent) 55%, var(--color-rule-2));
   border-radius: var(--radius-card);
   padding: var(--space-md);
   position: relative;
 }
 
-.step-idx {
-  font-size: var(--text-xs);
-  color: var(--color-accent);
-  font-weight: 500;
-  margin-bottom: var(--space-2xs);
+.step-node:hover {
+  border-top-color: var(--color-accent);
 }
 
 .step-title {
   font-size: var(--text-md);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-ink);
   margin-bottom: var(--space-xs);
 }
@@ -387,7 +420,7 @@ body {
 .step-text {
   font-size: var(--text-xs);
   color: var(--color-ink-2);
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 /* List with Line Markers */
@@ -411,12 +444,47 @@ body {
 
 .metric-name {
   color: var(--color-ink-2);
+  font-weight: 450;
 }
 
 .metric-num {
   font-variant-numeric: tabular-nums;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-ink);
+}
+
+/* Video Placeholder (Slide 11) */
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  border: 1.5px solid var(--color-rule-2);
+  background-color: var(--color-paper);
+  border-radius: var(--radius-card);
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.video-placeholder-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-md);
+  stroke: var(--color-accent);
+  opacity: 0.85;
+}
+
+.video-placeholder-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+
+.video-placeholder-sub {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
 }
 
 /* Title Slide Specifics */
@@ -430,15 +498,16 @@ body {
 
 .hero-super {
   font-size: var(--text-sm);
+  font-weight: 600;
   color: var(--color-accent);
   margin-bottom: var(--space-md);
 }
 
 .hero-main-title {
   font-size: var(--text-display);
-  font-weight: 300;
+  font-weight: 550;
   color: var(--color-ink);
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: var(--tracking-display);
   max-width: 18ch;
   margin-bottom: var(--space-md);
@@ -446,17 +515,17 @@ body {
 
 .hero-sub-title {
   font-size: var(--text-xl);
-  font-weight: 300;
+  font-weight: 350;
   color: var(--color-ink-2);
   max-width: 48ch;
-  line-height: 1.35;
+  line-height: 1.4;
   margin-bottom: var(--space-xl);
 }
 
 .hero-meta-block {
   display: flex;
   gap: var(--space-2xl);
-  border-top: var(--rule-hair) solid var(--color-rule-2);
+  border-top: 1.5px solid var(--color-rule-2);
   padding-top: var(--space-md);
   font-size: var(--text-sm);
 }
@@ -464,12 +533,13 @@ body {
 .meta-col-title {
   color: var(--color-muted);
   font-size: var(--text-xs);
+  font-weight: 500;
   margin-bottom: var(--space-3xs);
 }
 
 .meta-col-val {
   color: var(--color-ink);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 @media (max-width: 60rem) {
@@ -527,9 +597,9 @@ body {
     justify-content: space-between !important;
     width: 100% !important;
     width: var(--slide-print-width) !important;
-    height: 100vh !important;
-    min-height: 100vh !important;
-    max-height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
     overflow: hidden !important;
     box-sizing: border-box !important;
     margin: 0 !important;

@@ -109,7 +109,7 @@
               <tr>
                 <th style="width: 20%;">비교 축</th>
                 <th style="width: 40%;">선행 연구 (PAVAS CVPR 2026)</th>
-                <th style="width: 40%;">제안 연구 (본 과제)</th>
+                <th class="highlight-head" style="width: 40%;">제안 연구 (본 과제)</th>
               </tr>
             </thead>
             <tbody>
@@ -151,23 +151,19 @@
         <div class="slide-body">
           <div class="pipeline-track">
             <div class="step-node">
-              <div class="step-idx">Phase 1</div>
-              <h3 class="step-title">PAVAS 재구현</h3>
+              <h3 class="step-title">Phase 1. PAVAS 자체 재구현</h3>
               <p class="step-text">비공개 공식 코드 극복을 위해 MMAudio DiT 백본 역분석 및 경량 Phy-Adapter 모듈 자체 재구현 완료</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Phase 2</div>
-              <h3 class="step-title">결정론 엔진 구축</h3>
+              <h3 class="step-title">Phase 2. 결정론 질량 엔진 구축</h3>
               <p class="step-text">CUT3R 3D 점군 체적 적분, ViT 기반 표면 재질 유효 밀도 매핑, 내부 충실도 계수 보정 수식화</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Phase 3</div>
-              <h3 class="step-title">물리 어댑터 통합</h3>
+              <h3 class="step-title">Phase 3. 물리 어댑터 통합</h3>
               <p class="step-text">산출 질량의 로그 압축 및 Z-Score 정규화 후 동결된 DiT 백본에 잔차 변조 주입 및 파인튜닝</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Phase 4</div>
-              <h3 class="step-title">성능 검증</h3>
+              <h3 class="step-title">Phase 4. 성능 검증 및 평가</h3>
               <p class="step-text">대조군 테스트셋 기반 질량 추정 오차(MAPE) 및 음향 정량 지표(Bass, APCC, FAD) 비교 평가</p>
             </div>
           </div>
@@ -188,7 +184,7 @@
           <div class="grid-3col">
             <div class="panel">
               <h3 class="panel-title">하드웨어 제약 극복 축소 모델</h3>
-              <p class="panel-desc">자체 재구현을 진행하며 하드웨어(저장공간 및 그래픽카드) 차이 이슈로 인해, 가용 환경에 최적화된 <strong>PAVAS 모델 축소 모델</strong>로 구현했습니다.</p>
+              <p class="panel-desc">자체 재구현을 진행하며 하드웨어(저장공간 및 그래픽카드) 차이 이슈로 인해, 가용 환경에 최적화된 <strong><abbr title="PAVAS">PAVAS</abbr> 모델 축소 모델</strong>로 구현했습니다.</p>
             </div>
             <div class="panel">
               <h3 class="panel-title">Vision-UP 데이터 10% 학습 성공</h3>
@@ -345,23 +341,19 @@
         <div class="slide-body">
           <div class="pipeline-track">
             <div class="step-node">
-              <div class="step-idx">Step 1</div>
-              <h3 class="step-title">결정론적 질량 연산</h3>
+              <h3 class="step-title">Step 1. 결정론적 질량 연산</h3>
               <p class="step-text">m = α × ρ_eff × V 산출 (단위: kg, 물리적 실수 범위 $10^{-3} \sim 10^2$)</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Step 2</div>
-              <h3 class="step-title">로그 스케일 압축</h3>
+              <h3 class="step-title">Step 2. 로그 스케일 압축</h3>
               <p class="step-text">m_log = log(1 + m) 변환을 통해 극단적 스케일 편차를 압축하여 기울기 안정화</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Step 3</div>
-              <h3 class="step-title">Z-Score 정규화</h3>
+              <h3 class="step-title">Step 3. Z-Score 정규화</h3>
               <p class="step-text">m_norm = (m_log - μ) / σ 적용, 평균 0과 표준편차 1을 갖는 표준 정규분포 매핑</p>
             </div>
             <div class="step-node">
-              <div class="step-idx">Step 4</div>
-              <h3 class="step-title">DiT 잔차 변조</h3>
+              <h3 class="step-title">Step 4. DiT 잔차 변조 주입</h3>
               <p class="step-text">백본 가중치 동결 상태에서 Phy-Adapter 파인튜닝, 충돌음의 저음역 에너지 및 진폭 제어</p>
             </div>
           </div>
@@ -382,7 +374,7 @@
           <div class="grid-3col" style="margin-bottom: var(--space-lg);">
             <div class="stat-box">
               <div class="stat-value">68.4%</div>
-              <div class="stat-label">아키텍처 재구현 모델 (Qwne2.5모델 추측)</div>
+              <div class="stat-label">아키텍처 재구현 모델 (Qwen2.5 모델 추측)</div>
               <div class="stat-diff" style="color: var(--color-error);">질량 오판 심각</div>
             </div>
             <div class="stat-box">
@@ -399,38 +391,38 @@
 
           <!-- Hallmark Data Viz: Horizontal Bar Chart -->
           <div class="panel" style="padding: var(--space-lg);">
-            <div style="font-size: var(--text-sm); font-weight: 500; margin-bottom: var(--space-md); color: var(--color-ink);">
+            <div style="font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-md); color: var(--color-ink);">
               질량 추정 평균 절대 백분율 오차 (MAPE, 낮을수록 우수)
             </div>
-            <svg viewBox="0 0 800 130" width="100%" height="130" aria-label="질량 추정 MAPE 비교 차트" style="overflow: visible;">
+            <svg viewBox="0 0 800 135" width="100%" height="135" aria-label="질량 추정 MAPE 비교 차트" style="overflow: visible;">
               <!-- Gridlines -->
-              <line x1="160" y1="10" x2="160" y2="105" stroke="var(--color-rule)" stroke-width="1" />
-              <line x1="310" y1="10" x2="310" y2="105" stroke="var(--color-rule)" stroke-width="1" />
-              <line x1="460" y1="10" x2="460" y2="105" stroke="var(--color-rule)" stroke-width="1" />
-              <line x1="610" y1="10" x2="610" y2="105" stroke="var(--color-rule)" stroke-width="1" />
-              <line x1="760" y1="10" x2="760" y2="105" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="160" y1="10" x2="160" y2="108" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="310" y1="10" x2="310" y2="108" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="460" y1="10" x2="460" y2="108" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="610" y1="10" x2="610" y2="108" stroke="var(--color-rule)" stroke-width="1" />
+              <line x1="760" y1="10" x2="760" y2="108" stroke="var(--color-rule)" stroke-width="1" />
 
               <!-- Axis labels -->
-              <text x="160" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">0%</text>
-              <text x="310" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">20%</text>
-              <text x="460" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">40%</text>
-              <text x="610" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">60%</text>
-              <text x="760" y="122" fill="var(--color-muted)" font-size="11" text-anchor="middle">80%</text>
+              <text x="160" y="126" fill="var(--color-muted)" font-size="11" font-weight="500" text-anchor="middle">0%</text>
+              <text x="310" y="126" fill="var(--color-muted)" font-size="11" font-weight="500" text-anchor="middle">20%</text>
+              <text x="460" y="126" fill="var(--color-muted)" font-size="11" font-weight="500" text-anchor="middle">40%</text>
+              <text x="610" y="126" fill="var(--color-muted)" font-size="11" font-weight="500" text-anchor="middle">60%</text>
+              <text x="760" y="126" fill="var(--color-muted)" font-size="11" font-weight="500" text-anchor="middle">80%</text>
 
               <!-- Row 1: 재구현 모델 -->
-              <text x="145" y="30" fill="var(--color-ink-2)" font-size="12" text-anchor="end">재구현 모델 (Qwen2.5)</text>
-              <rect x="160" y="16" width="513" height="20" rx="2" fill="var(--color-muted)" />
-              <text x="683" y="31" fill="var(--color-ink)" font-size="12" font-variant-numeric="tabular-nums">68.4%</text>
+              <text x="145" y="30" fill="var(--color-ink-2)" font-size="12" font-weight="500" text-anchor="end">재구현 모델 (Qwen2.5)</text>
+              <rect x="160" y="15" width="513" height="22" rx="3" fill="var(--color-paper-3)" stroke="var(--color-rule-2)" />
+              <text x="686" y="31" fill="var(--color-ink)" font-size="12" font-weight="600" font-variant-numeric="tabular-nums">68.4%</text>
 
               <!-- Row 2: 단순 체적 모델 -->
-              <text x="145" y="62" fill="var(--color-ink-2)" font-size="12" text-anchor="end">단순 체적 (α=1.0)</text>
-              <rect x="160" y="48" width="234" height="20" rx="2" fill="var(--color-rule-2)" />
-              <text x="404" y="63" fill="var(--color-ink)" font-size="12" font-variant-numeric="tabular-nums">31.2%</text>
+              <text x="145" y="64" fill="var(--color-ink-2)" font-size="12" font-weight="500" text-anchor="end">단순 체적 (α=1.0)</text>
+              <rect x="160" y="49" width="234" height="22" rx="3" fill="var(--color-rule-2)" />
+              <text x="406" y="65" fill="var(--color-ink)" font-size="12" font-weight="600" font-variant-numeric="tabular-nums">31.2%</text>
 
-              <!-- Row 3: 제안 모델 -->
-              <text x="145" y="94" fill="var(--color-ink)" font-size="12" font-weight="500" text-anchor="end">제안 모델 (결정론적)</text>
-              <rect x="160" y="80" width="65" height="20" rx="2" fill="var(--color-accent)" />
-              <text x="235" y="95" fill="var(--color-accent)" font-size="12" font-weight="500" font-variant-numeric="tabular-nums">8.7%</text>
+              <!-- Row 3: 제안 모델 (Breakthrough Winner) -->
+              <text x="145" y="98" fill="var(--color-ink)" font-size="12" font-weight="600" text-anchor="end">제안 모델 (결정론적)</text>
+              <rect x="160" y="83" width="65" height="24" rx="3" fill="var(--color-accent)" />
+              <text x="238" y="100" fill="var(--color-accent)" font-size="14" font-weight="700" font-variant-numeric="tabular-nums">8.7%</text>
             </svg>
           </div>
         </div>
@@ -447,14 +439,23 @@
           <p class="slide-subtitle">고중량 물체 충돌 음향 합성 품질 개선 결과 및 비교 시연</p>
         </div>
         <div class="slide-body">
-          <!-- 예시 영상 삽입 영역 (비워둠) -->
-          <div class="panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 420px; border: 2px dashed var(--color-rule-2); background: rgba(28, 32, 39, 0.4); border-radius: var(--radius-card); text-align: center;">
-            <div style="font-size: 40px; margin-bottom: var(--space-sm); opacity: 0.7;">🎬</div>
-            <div style="font-size: var(--text-md); font-weight: 500; color: var(--color-ink); margin-bottom: var(--space-xs);">
-              예시 영상 삽입 영역
+          <!-- 예시 영상 삽입 영역 -->
+          <div class="video-placeholder">
+            <svg class="video-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="3"></rect>
+              <line x1="7" y1="2" x2="7" y2="22"></line>
+              <line x1="17" y1="2" x2="17" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="2" y1="7" x2="7" y2="7"></line>
+              <line x1="2" y1="17" x2="7" y2="17"></line>
+              <line x1="17" y1="17" x2="22" y2="17"></line>
+              <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+            <div class="video-placeholder-title">
+              고중량 물체 충돌 비교 시연 영상
             </div>
-            <div style="font-size: var(--text-sm); color: var(--color-muted);">
-              (이곳에 질량이 큰 물체의 충돌 비교 시연 영상을 삽입하세요)
+            <div class="video-placeholder-sub">
+              (질량이 큰 물체의 충돌 시연 비디오 또는 음향 스펙트로그램 비교 클립 임베딩)
             </div>
           </div>
         </div>

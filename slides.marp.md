@@ -3,32 +3,35 @@ marp: true
 theme: gaia
 _class: lead
 paginate: true
-backgroundColor: #16181d
-color: #f1f2f4
+backgroundColor: #121418
+color: #f3f5f7
 style: |
   section {
     font-family: 'Geologica', sans-serif;
-    padding: 40px 60px;
+    padding: 44px 64px;
     font-size: 22px;
-    line-height: 1.5;
+    line-height: 1.55;
   }
   h1 {
-    color: #f1f2f4;
+    color: #ffffff;
     font-size: 42px;
-    line-height: 1.2;
+    font-weight: 600;
+    line-height: 1.15;
     margin-bottom: 20px;
   }
   h2 {
-    color: #e2f952;
+    color: #ffffff;
     font-size: 32px;
+    font-weight: 600;
     margin-bottom: 25px;
-    border-bottom: 1px solid #363b47;
+    border-bottom: 2px solid #323842;
     padding-bottom: 10px;
   }
   h3 {
-    color: #f1f2f4;
-    font-size: 24px;
-    margin-bottom: 10px;
+    color: #9ba3b0;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
   }
   table {
     font-size: 19px;
@@ -37,42 +40,48 @@ style: |
     margin-top: 15px;
   }
   th {
-    background-color: #252932;
-    color: #e2f952;
-    border: 1px solid #363b47;
-    padding: 10px 14px;
+    background-color: #1a1e24;
+    color: #ffffff;
+    border: 1px solid #323842;
+    border-bottom: 2px solid #485260;
+    padding: 12px 16px;
+    font-weight: 600;
   }
   td {
-    border: 1px solid #363b47;
-    padding: 10px 14px;
+    border: 1px solid #2a2f38;
+    padding: 12px 16px;
+    color: #d0d4dc;
   }
   strong {
-    color: #e2f952;
+    color: #ffffff;
+    font-weight: 600;
   }
   .highlight {
-    color: #e2f952;
-    font-weight: bold;
+    color: #2dd4bf;
+    font-weight: 700;
   }
   .box {
-    background: #1c2027;
-    border: 1px solid #363b47;
+    background: #181c22;
+    border: 1px solid #323842;
     border-radius: 6px;
-    padding: 18px 22px;
+    padding: 18px 24px;
     margin-bottom: 15px;
   }
   .formula {
-    background: #1c2027;
-    border: 1px solid #e2f952;
+    background: #181c22;
+    border: 1.5px solid #2dd4bf;
     border-radius: 6px;
-    padding: 16px;
+    padding: 20px;
     text-align: center;
-    font-size: 26px;
-    color: #e2f952;
-    margin: 15px 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: #2dd4bf;
+    margin: 18px 0;
   }
   footer {
     font-size: 13px;
-    color: #8b92a0;
+    font-weight: 500;
+    color: #737c8d;
   }
 ---
 
