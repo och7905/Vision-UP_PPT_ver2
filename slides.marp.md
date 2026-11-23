@@ -86,10 +86,12 @@ style: |
 ---
 
 <!-- Slide 1: 표지 -->
+<p style="font-size: 16px; color: #2dd4bf; font-weight: 600; margin-bottom: 10px;">Vision-Up 최종 발표 / 2026</p>
+
 # 결정론적 질량 산출 기반<br>PAVAS 오디오 생성 개선 연구
 ### 3D 기하/광학 물성 기반 물리 추출 엔진 및 Phy-Adapter 통합 파이프라인
 
-**AIONE+** | SW융합대학 컴퓨터공학과
+**팀명:** AIONE+ | **소속:** SW융합대학 컴퓨터공학과
 
 ---
 
