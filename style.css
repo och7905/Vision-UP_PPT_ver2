@@ -1,7 +1,6 @@
-/* Hallmark · shape: feature-ledger · genre: modern-minimal · theme: Vantage (bolder) · job: try · draw: academic-presentation-slides-deterministic-0edd
- * hero: stage · nav: edge-aligned · footer: mast · imagery: none · signature: point-cloud-volume-density-pipeline · vantage: object/steel
- * axes: dark/grotesk-sans/vivid-emerald-sage · posture: bold-academic · contrast: pass · fold: pass · v2.2.0 */
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · Impeccable bolder dial applied */
+/* Hallmark · checked: 2026-11-23 · genre: modern-minimal
+ * floor: 0 FAIL · fixed: 8 (korean-font, font-weights, math-formatting, word-break, keybinds, touch-swipe, progress-bar, slide-transition) · structural: 0
+ * built: Hallmark · shape: feature-ledger · genre: modern-minimal · theme: Vantage (bolder) · job: try · draw: academic-presentation-slides-deterministic-0edd · hero: stage · nav: edge-aligned · footer: mast · imagery: none · signature: point-cloud-volume-density-pipeline · vantage: object/steel · axes: dark/grotesk-sans/vivid-emerald-sage · posture: bold-academic · contrast: pass · fold: pass · redesign: polish · v2.2.0 */
 /* Hallmark · scope: app */
 @import url("./tokens.css");
 @import url("./base.css");
@@ -21,6 +20,27 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   overflow-x: clip;
+}
+
+/* Deck Progress Track & Bar */
+.deck-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--color-rule);
+  z-index: calc(var(--z-sticky-nav) + 10);
+}
+
+.deck-progress-bar {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--color-accent) 60%, transparent);
+  transform-origin: left;
+  transform: scaleX(0.0833);
+  transition: transform var(--dur-short) var(--ease-out);
 }
 
 /* App Header & Navigation Bar */
@@ -167,6 +187,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  animation: slideFadeIn var(--dur-short) var(--ease-out);
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0.88;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.active {
+    animation: none;
+  }
 }
 
 /* Vantage Corner Ticks: Sharp architectural framing */
@@ -308,6 +346,14 @@ body {
 
 .v-table tr:last-child td {
   border-bottom: 0;
+}
+
+.v-table tbody tr {
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+
+.v-table tbody tr:hover td:not(.highlight) {
+  background-color: color-mix(in oklab, var(--color-paper-3) 45%, transparent);
 }
 
 .v-table td.highlight {
@@ -453,6 +499,34 @@ body {
   color: var(--color-ink);
 }
 
+/* Math Terminology & Sub/Superscripts */
+.math-term {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+sub, sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup { top: -0.45em; }
+sub { bottom: -0.2em; }
+
+/* Stat Highlight Badge (e.g. Slide 11) */
+.stat-highlight {
+  display: inline-block;
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-card);
+  background-color: color-mix(in oklab, var(--color-accent) 15%, transparent);
+  color: var(--color-accent);
+  border: var(--rule-hair) solid color-mix(in oklab, var(--color-accent) 35%, transparent);
+  font-variant-numeric: tabular-nums;
+}
+
 /* Video Placeholder (Slide 11) */
 .video-placeholder {
   display: flex;
@@ -460,11 +534,17 @@ body {
   align-items: center;
   justify-content: center;
   height: 400px;
-  border: 1.5px solid var(--color-rule-2);
+  border: 1.5px dashed var(--color-rule-2);
   background-color: var(--color-paper);
   border-radius: var(--radius-card);
   text-align: center;
   padding: var(--space-xl);
+  transition: border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+}
+
+.video-placeholder:hover {
+  border-color: color-mix(in oklab, var(--color-accent) 45%, var(--color-rule-2));
+  background-color: var(--color-paper-2);
 }
 
 .video-placeholder-icon {

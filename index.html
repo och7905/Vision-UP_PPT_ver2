@@ -7,10 +7,14 @@
   <meta name="description" content="3D 기하/광학 물성 기반 물리 추출 엔진 및 Phy-Adapter 통합 파이프라인 최종 발표 자료">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@200..500,0,0..100&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@200..700,0,0..100&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <div class="deck-progress-track" aria-hidden="true">
+    <div class="deck-progress-bar" id="deck-progress"></div>
+  </div>
+
   <header class="deck-chrome">
     <div class="deck-identity">
       <span class="deck-brand">AIONE+</span>
@@ -342,15 +346,15 @@
           <div class="pipeline-track">
             <div class="step-node">
               <h3 class="step-title">Step 1. 결정론적 질량 연산</h3>
-              <p class="step-text">m = α × ρ_eff × V 산출 (단위: kg, 물리적 실수 범위 $10^{-3} \sim 10^2$)</p>
+              <p class="step-text"><span class="math-term">m = α × ρ_eff × V</span> 산출 (단위: kg, 물리적 실수 범위 10<sup>-3</sup> ~ 10<sup>2</sup> kg)</p>
             </div>
             <div class="step-node">
               <h3 class="step-title">Step 2. 로그 스케일 압축</h3>
-              <p class="step-text">m_log = log(1 + m) 변환을 통해 극단적 스케일 편차를 압축하여 기울기 안정화</p>
+              <p class="step-text"><span class="math-term">m<sub>log</sub> = log(1 + m)</span> 변환을 통해 극단적 스케일 편차를 압축하여 기울기 안정화</p>
             </div>
             <div class="step-node">
               <h3 class="step-title">Step 3. Z-Score 정규화</h3>
-              <p class="step-text">m_norm = (m_log - μ) / σ 적용, 평균 0과 표준편차 1을 갖는 표준 정규분포 매핑</p>
+              <p class="step-text"><span class="math-term">m<sub>norm</sub> = (m<sub>log</sub> - μ) / σ</span> 적용, 평균 0과 표준편차 1을 갖는 표준 정규분포 매핑</p>
             </div>
             <div class="step-node">
               <h3 class="step-title">Step 4. DiT 잔차 변조 주입</h3>
@@ -435,7 +439,7 @@
       <!-- Slide 11: 특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다 -->
       <section class="slide ticks" id="slide-11" aria-label="특정상황 질량이 큰 물체의 충돌 영상 개선">
         <div class="slide-header">
-          <h2 class="slide-title">특정상황: 질량이 큰 물체의 충돌 영상에서 ~퍼센트의 개선이 되었다</h2>
+          <h2 class="slide-title">특정상황: 질량이 큰 물체의 충돌 영상에서 <span class="stat-highlight">~%</span>의 개선이 되었다</h2>
           <p class="slide-subtitle">고중량 물체 충돌 음향 합성 품질 개선 결과 및 비교 시연</p>
         </div>
         <div class="slide-body">
@@ -515,6 +519,7 @@
     (function () {
       const slides = document.querySelectorAll('.slide');
       const counter = document.getElementById('deck-counter');
+      const progressBar = document.getElementById('deck-progress');
       const btnPrev = document.getElementById('btn-prev');
       const btnNext = document.getElementById('btn-next');
       const btnFullscreen = document.getElementById('btn-fullscreen');
@@ -534,8 +539,19 @@
         const currentPadded = String(currentIndex + 1).padStart(2, '0');
         const totalPadded = String(totalSlides).padStart(2, '0');
         counter.textContent = currentPadded + ' / ' + totalPadded;
+        if (progressBar) {
+          progressBar.style.transform = 'scaleX(' + ((currentIndex + 1) / totalSlides) + ')';
+        }
         btnPrev.disabled = (currentIndex === 0);
         btnNext.disabled = (currentIndex === totalSlides - 1);
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(function () {});
+        } else {
+          document.exitFullscreen().catch(function () {});
+        }
       }
 
       btnPrev.addEventListener('click', function () {
@@ -546,19 +562,14 @@
         updateSlide(currentIndex + 1);
       });
 
-      btnFullscreen.addEventListener('click', function () {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(function () {});
-        } else {
-          document.exitFullscreen().catch(function () {});
-        }
-      });
+      btnFullscreen.addEventListener('click', toggleFullscreen);
 
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
           e.preventDefault();
           updateSlide(currentIndex + 1);
-        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'Backspace') {
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'Backspace') {
           e.preventDefault();
           updateSlide(currentIndex - 1);
         } else if (e.key === 'Home') {
@@ -567,8 +578,35 @@
         } else if (e.key === 'End') {
           e.preventDefault();
           updateSlide(totalSlides - 1);
+        } else if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          toggleFullscreen();
         }
       });
+
+      // Touch swipe support for tablet / mobile devices
+      let touchStartX = 0;
+      let touchStartY = 0;
+      document.addEventListener('touchstart', function (e) {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+        }
+      }, { passive: true });
+
+      document.addEventListener('touchend', function (e) {
+        if (e.changedTouches && e.changedTouches.length > 0) {
+          const deltaX = e.changedTouches[0].screenX - touchStartX;
+          const deltaY = e.changedTouches[0].screenY - touchStartY;
+          if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            if (deltaX < 0) {
+              updateSlide(currentIndex + 1);
+            } else {
+              updateSlide(currentIndex - 1);
+            }
+          }
+        }
+      }, { passive: true });
 
       updateSlide(0);
     })();

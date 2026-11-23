@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "at": "2026-11-23T14:26:40.562Z",
+ "scope": "page",
+ "summary": {
+  "fails": 0,
+  "reflex": 0,
+  "warns": 0
+ },
+ "files": {
+  "index.html": {
+   "handlers": [],
+   "links": [],
+   "fields": [],
+   "hooks": [],
+   "ids": [
+    "btn-fullscreen",
+    "btn-next",
+    "btn-prev",
+    "deck-counter",
+    "slide-1",
+    "slide-10",
+    "slide-11",
+    "slide-12",
+    "slide-2",
+    "slide-3",
+    "slide-4",
+    "slide-5",
+    "slide-6",
+    "slide-7",
+    "slide-8",
+    "slide-9"
+   ],
+   "scripts": []
+  }
+ },
+ "wiring": {
+  "handlers": [],
+  "links": [],
+  "fields": [],
+  "hooks": [],
+  "ids": [
+   "btn-fullscreen",
+   "btn-next",
+   "btn-prev",
+   "deck-counter",
+   "slide-1",
+   "slide-10",
+   "slide-11",
+   "slide-12",
+   "slide-2",
+   "slide-3",
+   "slide-4",
+   "slide-5",
+   "slide-6",
+   "slide-7",
+   "slide-8",
+   "slide-9"
+  ]
+ },
+ "scripts": {
+  "index.html": {
+   "queried": [
+    "#btn-fullscreen",
+    "#btn-next",
+    "#btn-prev",
+    "#deck-counter",
+    ".slide"
+   ],
+   "hooked": [
+    "#btn-fullscreen",
+    "#btn-next",
+    "#btn-prev",
+    "#deck-counter",
+    ".slide"
+   ],
+   "hides": false
+  }
+ },
+ "pages": {}
+}

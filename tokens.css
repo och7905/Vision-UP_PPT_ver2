@@ -10,12 +10,13 @@
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
   --color-paper: oklch(12% 0.008 240); --color-paper-2: oklch(15.5% 0.012 240); --color-paper-3: oklch(19.5% 0.015 240);
-  --color-ink: oklch(96% 0.003 240); --color-ink-2: oklch(82% 0.008 240); --color-muted: oklch(62% 0.012 240);
+  --color-ink: oklch(96% 0.003 240); --color-ink-2: oklch(84% 0.008 240); --color-muted: oklch(65% 0.012 240);
   --color-rule: oklch(25% 0.01 240); --color-rule-2: oklch(32% 0.014 240);
   --color-accent: oklch(85% 0.13 140); --color-accent-hi: oklch(89% 0.12 140); --color-accent-ink: oklch(16% 0.03 140); --color-focus: oklch(85% 0.13 140);
   --point-lo: oklch(40% 0.02 240); --point-mid: oklch(65% 0.02 235); --point-hi: oklch(95% 0.01 220);
   --color-slot: oklch(18% 0.012 240);
-  --font-display: "Geologica", ui-sans-serif, system-ui, sans-serif; --font-body: "Geologica", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Geologica", "Noto Sans KR", "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Geologica", "Noto Sans KR", "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, sans-serif;
   --radius-card: 6px; --radius-pill: 999px; --rule-hair: 1px; --tick: 12px;
   --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
   --tracking-display: -0.035em; --display-weight: 550;
