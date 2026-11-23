@@ -10,6 +10,116 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV,SHRP@200..700,0,0..100&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
+  <style media="print">
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    @page :left { margin: 0; }
+    @page :right { margin: 0; }
+    @page :first { margin: 0; }
+
+    *,
+    *::before,
+    *::after,
+    svg,
+    foreignObject {
+      background-image: none !important;
+      -webkit-mask: none !important;
+      mask: none !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    .ticks::before,
+    .ticks::after {
+      display: none !important;
+      content: none !important;
+      border: none !important;
+    }
+
+    .deck-chrome,
+    .deck-progress-track,
+    .deck-blank-screen {
+      display: none !important;
+    }
+
+    html, body {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: var(--color-paper-2) !important;
+      background: var(--color-paper-2) !important;
+      background-image: none !important;
+      color: var(--color-ink) !important;
+      overflow: visible !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .slide-stage,
+    .slide-deck {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      background-image: none !important;
+    }
+
+    .slide {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+      max-height: 100dvh !important;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: var(--space-xl) !important;
+      border: none !important;
+      outline: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      background-color: var(--color-paper-2) !important;
+      background: var(--color-paper-2) !important;
+      background-image: none !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .slide:last-child {
+      page-break-after: auto !important;
+      break-after: auto !important;
+    }
+
+    .v-table td.highlight {
+      border-inline: none !important;
+    }
+
+    svg[data-marpit-svg], foreignObject {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      background-image: none !important;
+    }
+  </style>
 </head>
 <body>
   <div class="deck-blank-screen" id="deck-blank-screen" aria-hidden="true"></div>

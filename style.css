@@ -9,7 +9,7 @@
   --slide-width: 100%;
   --slide-max-width: 1360px;
   --slide-height: 740px;
-  --slide-print-width: 100vw;
+  --slide-print-width: 100%;
 }
 
 body {
@@ -692,13 +692,45 @@ sub { bottom: -0.2em; }
   }
 }
 
-/* Print Styles: 16:9 Landscape, 12 Distinct Pages, Hidden Chrome */
+/* Print Styles: 16:9 Landscape, 12 Distinct Pages, Clean PDF Output */
 @page {
-  size: 16/9 landscape;
+  size: landscape;
+  margin: 0;
+}
+
+@page :left {
+  margin: 0;
+}
+
+@page :right {
+  margin: 0;
+}
+
+@page :first {
   margin: 0;
 }
 
 @media print {
+  /* 배경 그리드, 마스크, 그림자 및 불필요한 장식 실선 전면 인쇄 제외 */
+  *,
+  *::before,
+  *::after,
+  svg,
+  foreignObject {
+    background-image: none !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .ticks::before,
+  .ticks::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+  }
+
   .deck-chrome,
   .deck-progress-track,
   .deck-blank-screen {
@@ -711,7 +743,9 @@ sub { bottom: -0.2em; }
     min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background-color: var(--color-paper) !important;
+    background-color: var(--color-paper-2) !important;
+    background: var(--color-paper-2) !important;
+    background-image: none !important;
     color: var(--color-ink) !important;
     overflow: visible !important;
     -webkit-print-color-adjust: exact !important;
@@ -723,15 +757,25 @@ sub { bottom: -0.2em; }
     padding: 0 !important;
     margin: 0 !important;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
   }
 
   .slide-deck {
     display: block !important;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
   }
 
   .slide {
@@ -739,7 +783,8 @@ sub { bottom: -0.2em; }
     flex-direction: column !important;
     justify-content: space-between !important;
     width: 100% !important;
-    width: var(--slide-print-width) !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
     height: 100dvh !important;
     min-height: 100dvh !important;
     max-height: 100dvh !important;
@@ -748,8 +793,12 @@ sub { bottom: -0.2em; }
     margin: 0 !important;
     padding: var(--space-xl) !important;
     border: none !important;
+    outline: none !important;
     border-radius: 0 !important;
+    box-shadow: none !important;
     background-color: var(--color-paper-2) !important;
+    background: var(--color-paper-2) !important;
+    background-image: none !important;
     page-break-after: always !important;
     break-after: page !important;
     page-break-inside: avoid !important;
@@ -761,6 +810,18 @@ sub { bottom: -0.2em; }
   .slide:last-child {
     page-break-after: auto !important;
     break-after: auto !important;
+  }
+
+  .v-table td.highlight {
+    border-inline: none !important;
+  }
+
+  svg[data-marpit-svg], foreignObject {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
   }
 
   .slide-header {
